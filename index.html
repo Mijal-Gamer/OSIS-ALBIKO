@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OSIS Astamayana</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: radial-gradient(circle at center, #08122a, #020409);
+    color: white;
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+  }
+
+  /* Efek cahaya mengikuti mouse */
+  .light {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    pointer-events: none;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 180, 255, 0.8), transparent 70%);
+    filter: blur(100px);
+    transition: transform 0.1s ease-out;
+    z-index: 0;
+  }
+
+  /* Boot animation */
+  .boot-screen {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #00111f, #000);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeOut 1.3s ease 3.8s forwards;
+    z-index: 10;
+  }
+
+  .boot-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    animation: spin3D 6s linear infinite, bounce 3.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 25px rgba(0, 200, 255, 0.7));
+  }
+
+  .boot-logo {
+    font-size: 3em;
+    font-weight: bold;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #00d4ff, #ffffff);
+    -webkit-background-clip: text;
+    color: transparent;
+    opacity: 0;
+    animation: bootText 3s ease forwards;
+    text-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+    margin-top: 20px;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
+  @keyframes spin3D {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+  }
+
+  @keyframes bootText {
+    0% { opacity: 0; transform: scale(0.7); filter: blur(10px); }
+    50% { opacity: 1; transform: scale(1.1); filter: blur(0); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes fadeOut {
+    to { opacity: 0; visibility: hidden; }
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 15, 30, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    z-index: 5;
+    border-bottom: 1px solid rgba(0, 200, 255, 0.2);
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .logo-container img {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #001a33;
+    border: 2px solid rgba(0, 255, 255, 0.4);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .logo-container img:hover {
+    transform: scale(1.1);
+  }
+
+  .logo-container img.zoomed {
+    transform: scale(1.6);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.9);
+  }
+
+  header h2 {
+    color: #00bfff;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+  }
+
+  nav a {
+    color: #cceeff;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s;
+  }
+
+  nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #00ffff;
+    transition: width 0.3s;
+  }
+
+  nav a:hover {
+    color: #00ffff;
+  }
+
+  nav a:hover::after {
+    width: 100%;
+  }
+
+  section {
+    padding: 120px 100px;
+    text-align: center;
+    max-width: 1200px;
+    margin: auto;
+  }
+
+  section h1, section h2 {
+    font-size: 2.3em;
+    color: #00e0ff;
+    text-shadow: 0 0 15px rgba(0, 200, 255, 0.8);
+    margin-bottom: 25px;
+  }
+
+  section p {
+    font-size: 1.1em;
+    color: #e0f7ff;
+    line-height: 1.8;
+  }
+
+  .section-logo {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    animation: spin3D 7s linear infinite, bounce 4s ease-in-out infinite;
+    margin-bottom: 25px;
+    filter: drop-shadow(0 0 30px rgba(0, 180, 255, 0.8));
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .section-logo.zoomed {
+    transform: scale(1.6);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.9);
+  }
+
+  .card-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 40px;
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    border-radius: 22px;
+    width: 260px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 25px rgba(0, 204, 255, 0.15);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 40px rgba(0, 225, 255, 0.5);
+  }
+
+  .card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .card-content {
+    padding: 15px;
+  }
+
+  .card-content h3 {
+    color: #00e0ff;
+    font-size: 1.2em;
+  }
+
+  .card-content p {
+    font-size: 0.9em;
+    color: #b3eaff;
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px;
+    color: #9be8ff;
+    font-size: 0.9em;
+  }
+
+  .particle {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background: rgba(0, 255, 255, 0.8);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1;
+    animation: float 5s linear infinite;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="light"></div>
+
+<div class="boot-screen">
+  <img src="https://media.discordapp.net/attachments/1421439220140216380/1430888605215232091/Logo_Osis_Fix.png?ex=68fb6a5c&is=68fa18dc&hm=38433b0fae6490b895f78f0865b63814503d1d5f650b9db7f3e2c2c84e8d1dc1&=&format=webp&quality=lossless" class="boot-img" alt="Logo OSIS">
+  <div class="boot-logo">ASTAMAYANA</div>
+</div>
+
+<header>
+  <div class="logo-container">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy2_7GZsIiWyD6fNG2lT_6osjewkDQ-6A7mw&s" alt="Logo Sekolah" class="clickable-logo">
+    <img src="https://media.discordapp.net/attachments/1421439220140216380/1430888605215232091/Logo_Osis_Fix.png?ex=68fb6a5c&is=68fa18dc&hm=38433b0fae6490b895f78f0865b63814503d1d5f650b9db7f3e2c2c84e8d1dc1&=&format=webp&quality=lossless" alt="Logo OSIS" class="clickable-logo">
+    <h2>OSIS Astamayana</h2>
+  </div>
+  <nav>
+    <a href="#tentang">Tentang</a>
+    <a href="#struktur">Struktur</a>
+    <a href="#kegiatan">Kegiatan</a>
+    <a href="#galeri">Galeri</a>
+    <a href="#kontak">Kontak</a>
+  </nav>
+</header>
+
+<section id="tentang">
+  <img src="https://media.discordapp.net/attachments/1421439220140216380/1430888605215232091/Logo_Osis_Fix.png?ex=68fb6a5c&is=68fa18dc&hm=38433b0fae6490b895f78f0865b63814503d1d5f650b9db7f3e2c2c84e8d1dc1&=&format=webp&quality=lossless" class="section-logo clickable-logo" alt="Logo OSIS">
+  <h1>Tentang OSIS Astamayana</h1>
+  <p>OSIS Astamayana adalah organisasi siswa yang berfokus pada pengembangan kreativitas, solidaritas, dan kepemimpinan di lingkungan sekolah SMPII Al Abidin Sukoharjo.</p>
+</section>
+
+<section id="struktur">
+  <h2>Struktur Organisasi</h2>
+  <div class="card-container">
+    <div class="card"><div class="card-content"><h3>Ketua OSIS</h3><p>[Nama Ketua]</p></div></div>
+    <div class="card"><div class="card-content"><h3>Wakil Ketua</h3><p>[Nama Wakil]</p></div></div>
+    <div class="card"><div class="card-content"><h3>Sekretaris</h3><p>[Nama Sekretaris]</p></div></div>
+    <div class="card"><div class="card-content"><h3>Bendahara</h3><p>[Nama Bendahara]</p></div></div>
+  </div>
+</section>
+
+<section id="kegiatan">
+  <h2>Kegiatan OSIS</h2>
+  <ul style="list-style:none; color:#b3eaff; font-size:1.1em;">
+    <li>• Pelatihan Teknologi & Kreativitas Digital</li>
+    <li>• Workshop Kepemimpinan</li>
+    <li>• Kegiatan Sosial & Peduli Lingkungan</li>
+    <li>• Event & Lomba Sekolah</li>
+  </ul>
+</section>
+
+<section id="galeri">
+  <h2>Galeri Kegiatan</h2>
+  <div class="card-container">
+    <div class="card"><img src="https://picsum.photos/400/200?random=1"><div class="card-content"><h3>Kegiatan Gotong Royong</h3><p>Kegiatan rutin menjaga kebersihan sekolah.</p></div></div>
+    <div class="card"><img src="https://picsum.photos/400/200?random=2"><div class="card-content"><h3>Festival Seni</h3><p>Ajang menampilkan bakat dan kreativitas siswa.</p></div></div>
+    <div class="card"><img src="https://picsum.photos/400/200?random=3"><div class="card-content"><h3>OSIS Day</h3><p>Hari kebanggaan siswa Astamayana.</p></div></div>
+  </div>
+</section>
+
+<section id="kontak">
+  <h2>Kontak OSIS</h2>
+  <p>
+    📧 Email: <a href="mailto:osisalbisuk1@gmail.com" style="color:#00ffff;">osisalbisuk1@gmail.com</a><br>
+    📷 Instagram: <a href="https://www.instagram.com/osisalbidskh" target="_blank" style="color:#00ffff;">@osisalbidskh</a><br>
+    📍 Lokasi: <a href="https://maps.app.goo.gl/tNivjDBvpnDfXVgTA" target="_blank" style="color:#00ffff;">Lihat di Google Maps</a>
+  </p>
+</section>
+
+<footer>
+  © 2025 OSIS Astamayana. All Right Reserved.
+</footer>
+
+<script>
+  // Cahaya mengikuti mouse
+  const light = document.querySelector('.light');
+  document.addEventListener('mousemove', e => {
+    light.style.transform = `translate(${e.clientX - 250}px, ${e.clientY - 250}px)`;
+  });
+
+  // Partikel random
+  const particleCount = 25;
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    particle.style.left = Math.random() * 100 + 'vw';
+    particle.style.top = Math.random() * 100 + 'vh';
+    particle.style.animationDuration = 4 + Math.random() * 3 + 's';
+    document.body.appendChild(particle);
+  }
+
+  // Zoom on click
+  document.querySelectorAll('.clickable-logo').forEach(logo => {
+    logo.addEventListener('click', () => {
+      logo.classList.toggle('zoomed');
+    });
+  });
+</script>
+</body>
+</html>
