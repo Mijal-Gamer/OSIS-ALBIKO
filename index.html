@@ -56,7 +56,7 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    animation: spin3D 6s linear infinite, bounce 3.5s ease-in-out infinite;
+    animation: spin3D 8s linear infinite, bounce 4s ease-in-out infinite;
     filter: drop-shadow(0 0 25px rgba(0, 200, 255, 0.7));
   }
 
@@ -105,12 +105,14 @@
     padding: 10px 40px;
     z-index: 5;
     border-bottom: 1px solid rgba(0, 200, 255, 0.2);
+    flex-wrap: wrap;
   }
 
   .logo-container {
     display: flex;
     align-items: center;
     gap: 15px;
+    flex-wrap: wrap;
   }
 
   .logo-container img {
@@ -192,7 +194,7 @@
     height: 130px;
     border-radius: 50%;
     object-fit: cover;
-    animation: spin3D 7s linear infinite, bounce 4s ease-in-out infinite;
+    animation: spin3D 9s linear infinite, bounce 5s ease-in-out infinite;
     margin-bottom: 25px;
     filter: drop-shadow(0 0 30px rgba(0, 180, 255, 0.8));
     cursor: pointer;
@@ -255,6 +257,7 @@
     font-size: 0.9em;
   }
 
+  /* Efek partikel */
   .particle {
     position: fixed;
     width: 4px;
@@ -269,6 +272,28 @@
   @keyframes float {
     0% { transform: translateY(0) scale(1); opacity: 1; }
     100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
+  }
+
+  /* Responsif untuk HP */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      padding: 15px 20px;
+      text-align: center;
+    }
+    .logo-container {
+      flex-direction: column;
+      gap: 10px;
+    }
+    nav {
+      margin-top: 10px;
+    }
+    section {
+      padding: 100px 20px;
+    }
+    section h1, section h2 {
+      font-size: 1.7em;
+    }
   }
 </style>
 </head>
@@ -341,17 +366,15 @@
 </section>
 
 <footer>
-  © 2025 OSIS Astamayana. All Right Reserved.
+  © 2025 OSIS Astamayana. All Rights Reserved.
 </footer>
 
 <script>
-  // Cahaya mengikuti mouse
   const light = document.querySelector('.light');
   document.addEventListener('mousemove', e => {
     light.style.transform = `translate(${e.clientX - 250}px, ${e.clientY - 250}px)`;
   });
 
-  // Partikel random
   const particleCount = 25;
   for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement('div');
@@ -362,7 +385,6 @@
     document.body.appendChild(particle);
   }
 
-  // Zoom on click
   document.querySelectorAll('.clickable-logo').forEach(logo => {
     logo.addEventListener('click', () => {
       logo.classList.toggle('zoomed');
