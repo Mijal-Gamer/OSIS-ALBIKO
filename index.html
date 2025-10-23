@@ -48,15 +48,15 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    animation: fadeOut 1.3s ease 3.8s forwards;
+    animation: fadeOut 1.5s ease 4s forwards;
     z-index: 10;
   }
 
   .boot-img {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
-    animation: spin3D 8s linear infinite, bounce 4s ease-in-out infinite;
+    animation: spin3D 10s linear infinite, bounce 5s ease-in-out infinite;
     filter: drop-shadow(0 0 25px rgba(0, 200, 255, 0.7));
   }
 
@@ -75,7 +75,7 @@
 
   @keyframes bounce {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+    50% { transform: translateY(-10px); }
   }
 
   @keyframes spin3D {
@@ -194,7 +194,7 @@
     height: 130px;
     border-radius: 50%;
     object-fit: cover;
-    animation: spin3D 9s linear infinite, bounce 5s ease-in-out infinite;
+    animation: spin3D 12s linear infinite, bounce 5s ease-in-out infinite;
     margin-bottom: 25px;
     filter: drop-shadow(0 0 30px rgba(0, 180, 255, 0.8));
     cursor: pointer;
@@ -274,23 +274,41 @@
     100% { transform: translateY(-100vh) scale(0.5); opacity: 0; }
   }
 
-  /* Responsif untuk HP */
+  /* ==== Tampilan Mobile Saja ==== */
   @media (max-width: 768px) {
     header {
       flex-direction: column;
       padding: 15px 20px;
       text-align: center;
     }
+
     .logo-container {
-      flex-direction: column;
-      gap: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row !important;
+      gap: 15px;
+      margin-bottom: 10px;
     }
+
+    .logo-container img {
+      width: 70px;
+      height: 70px;
+    }
+
     nav {
-      margin-top: 10px;
+      margin-top: 8px;
     }
+
+    nav a {
+      margin: 6px;
+      font-size: 0.95em;
+    }
+
     section {
       padding: 100px 20px;
     }
+
     section h1, section h2 {
       font-size: 1.7em;
     }
