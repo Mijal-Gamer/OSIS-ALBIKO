@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>OSIS Astamayana Albiko</title>
 
-<link rel="icon" type="image/png" href="https://cdn.discordapp.com/attachments/1421439220140216380/1430933652136525957/cropped_circle_image_1.png">
+<link rel="icon" type="image/png" href="https://cdn.discordapp.com/attachments/1421439220140216380/1430933652136525957/cropped_circle_image_1.png?ex=68fce5d0&is=68fb9450&hm=c5c96261773a625355f416b331614690b442d0bedb2db813436b2a5d215a7a72&">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
@@ -32,7 +33,7 @@
     animation:logoIn 2s ease-out forwards,spin3D 10s linear infinite 2s;
     filter:drop-shadow(0 0 25px rgba(0,200,255,0.7));
   }
-  @keyframes logoIn {0%{opacity:0;transform:translateY(60px);}60%{opacity:1;transform:translateY(-5px);}100%{opacity:1;transform:translateY(0);}}
+  @keyframes logoIn {0%{opacity:0;transform:translateY(60px);}60%{opacity:1;transform:translateY(-5px);}100%{opacity:1;transform:translateY(0);} }
   .boot-logo {
     font-size:3em;font-weight:bold;letter-spacing:2px;
     background:linear-gradient(90deg,#00d4ff,#ffffff);
@@ -40,8 +41,8 @@
     animation:bootText 2.5s ease forwards 2s;text-shadow:0 0 25px rgba(0,255,255,0.8);
     margin-top:25px;
   }
-  @keyframes spin3D {0%{transform:rotateY(0deg);}100%{transform:rotateY(360deg);}}
-  @keyframes bootText {0%{opacity:0;transform:translateY(20px);filter:blur(10px);}60%{opacity:1;transform:translateY(-3px);filter:blur(0);}100%{opacity:1;transform:translateY(0);}}
+  @keyframes spin3D {0%{transform:rotateY(0deg);}100%{transform:rotateY(360deg);} }
+  @keyframes bootText {0%{opacity:0;transform:translateY(20px);filter:blur(10px);}60%{opacity:1;transform:translateY(-3px);filter:blur(0);}100%{opacity:1;transform:translateY(0);} }
   @keyframes fadeOut {to{opacity:0;visibility:hidden;}}
 
   /* Header */
@@ -96,20 +97,81 @@
   footer {text-align:center;padding:40px;color:#9be8ff;font-size:0.9em;}
 
   /* Smooth toggle */
-  #moreContent {
-    max-height:0;
-    overflow:hidden;
-    opacity:0;
-    transition:max-height 0.8s ease,opacity 0.8s ease;
-  }
-  #moreContent.show {
-    max-height:2000px; /* cukup besar untuk semua isi */
-    opacity:1;
-  }
+  #moreContent {max-height:0;overflow:hidden;opacity:0;transition:max-height 0.8s ease,opacity 0.8s ease;}
+  #moreContent.show {max-height:2000px;opacity:1;}
 
   /* Particles */
   .particle {position:fixed;width:4px;height:4px;background:rgba(0,255,255,0.8);border-radius:50%;pointer-events:none;z-index:1;animation:float 5s linear infinite;}
   @keyframes float {0%{transform:translateY(0) scale(1);opacity:1;}100%{transform:translateY(-100vh) scale(0.5);opacity:0;}}
+
+  /* Sosial media wrapper */
+  .wrapper {
+    display:inline-flex;
+    list-style:none;
+    height:120px;
+    width:100%;
+    padding-top:40px;
+    justify-content:center;
+    font-family:"Poppins",sans-serif;
+  }
+  .wrapper .icon {
+    position:relative;
+    background:#fff;
+    border-radius:50%;
+    margin:10px;
+    width:50px;
+    height:50px;
+    font-size:22px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    box-shadow:0 10px 10px rgba(0,0,0,0.1);
+    cursor:pointer;
+    transition:all 0.3s cubic-bezier(0.68,-0.55,0.265,1.55);
+  }
+  .wrapper .tooltip {
+    position:absolute;
+    top:0;
+    font-size:14px;
+    background:#fff;
+    color:#fff;
+    padding:5px 8px;
+    border-radius:5px;
+    box-shadow:0 10px 10px rgba(0,0,0,0.1);
+    opacity:0;
+    pointer-events:none;
+    transition:all 0.3s cubic-bezier(0.68,-0.55,0.265,1.55);
+  }
+  .wrapper .tooltip::before {
+    position:absolute;
+    content:"";
+    height:8px;width:8px;
+    background:#fff;
+    bottom:-3px;left:50%;
+    transform:translate(-50%) rotate(45deg);
+  }
+  .wrapper .icon:hover .tooltip {
+    top:-45px;opacity:1;visibility:visible;pointer-events:auto;
+  }
+  .wrapper .icon:hover span,.wrapper .icon:hover .tooltip {
+    text-shadow:0px -1px 0px rgba(0,0,0,0.1);
+  }
+  .wrapper .instagram:hover,
+  .wrapper .instagram:hover .tooltip,
+  .wrapper .instagram:hover .tooltip::before {
+    background:#e4405f;color:#fff;
+  }
+  .wrapper .email:hover,
+  .wrapper .email:hover .tooltip,
+  .wrapper .email:hover .tooltip::before {
+    background:#1da1f2;color:#fff;
+  }
+  .wrapper .location:hover,
+  .wrapper .location:hover .tooltip,
+  .wrapper .location:hover .tooltip::before {
+    background:#17bf63;color:#fff;
+  }
 
   @media(max-width:768px){
     header{flex-direction:column;padding:15px 20px;text-align:center;}
@@ -150,7 +212,6 @@
   <p>OSIS Astamayana adalah organisasi siswa yang berfokus pada pengembangan kreativitas, solidaritas, dan kepemimpinan di lingkungan sekolah SMPII Al Abidin Sukoharjo.</p>
 </section>
 
-<!-- STRUKTUR OSIS -->
 <section id="struktur">
   <h2>Struktur Organisasi OSIS Astamayana</h2>
   <div style="background:rgba(0,20,40,0.7);padding:25px;border-radius:15px;box-shadow:0 0 20px rgba(0,200,255,0.4);max-width:800px;margin:auto;">
@@ -202,24 +263,31 @@
 </section>
 
 <section id="kontak">
-  <h2>Kontak OSIS</h2>
-  <p>
-    📧 Email: <a href="mailto:osisalbisuk1@gmail.com" style="color:#00ffff;">osisalbisuk1@gmail.com</a><br>
-    📷 Instagram: <a href="https://www.instagram.com/osisalbidskh" target="_blank" style="color:#00ffff;">@osisalbidskh</a><br>
-    📍 Lokasi: <a href="https://maps.app.goo.gl/z5fVC4dsgjTUyuPHA" target="_blank" style="color:#00ffff;">Lihat di Google Maps</a>
-  </p>
+  <h2>Hubungi Kami</h2>
+  <ul class="wrapper">
+    <li class="icon instagram">
+      <span class="tooltip">Instagram</span>
+      <a href="https://www.instagram.com/osisalbidskh" target="_blank"><i class="ri-instagram-line"></i></a>
+    </li>
+    <li class="icon email">
+      <span class="tooltip">Email</span>
+      <a href="mailto:osisalbisuk1@gmail.com"><i class="ri-mail-line"></i></a>
+    </li>
+    <li class="icon location">
+      <span class="tooltip">Lokasi</span>
+      <a href="https://maps.google.com/?q=SMPII+Al+Abidin+Sukoharjo" target="_blank"><i class="ri-map-pin-line"></i></a>
+    </li>
+  </ul>
 </section>
 
 <footer>© 2025 OSIS Astamayana. All Rights Reserved.</footer>
 
 <script>
-  // Cahaya mouse
   const light=document.querySelector('.light');
   document.addEventListener('mousemove',e=>{
     light.style.transform=`translate(${e.clientX-250}px,${e.clientY-250}px)`;
   });
 
-  // Partikel
   const particleCount=25;
   for(let i=0;i<particleCount;i++){
     const p=document.createElement('div');
@@ -230,12 +298,10 @@
     document.body.appendChild(p);
   }
 
-  // Zoom logo
   document.querySelectorAll('.clickable-logo').forEach(l=>{
     l.addEventListener('click',()=>{l.classList.toggle('zoomed');});
   });
 
-  // Smooth toggle anggota OSIS
   const toggleBtn=document.getElementById('toggleMore');
   const more=document.getElementById('moreContent');
   let visible=false;
