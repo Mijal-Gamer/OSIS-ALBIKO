@@ -4,12 +4,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Admin OSIS Astamayana</title>
-<link rel="icon" type="image/png" href="https://cdn.discordapp.com/attachments/1421439220140216380/1430933652136525957/cropped_circle_image_1.png?ex=68fce5d0&is=68fb9450&hm=c5c96261773a625355f416b331614690b442d0bedb2db813436b2a5d215a7a72&">
+<link rel="icon" type="image/png" href="https://cdn.discordapp.com/attachments/1421439220140216380/1430933652136525957/cropped_circle_image_1.png">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
   * {margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif;}
-  
   body {
     background: radial-gradient(circle at center, #08122a, #020409);
     color: white;
@@ -17,125 +16,60 @@
     overflow: hidden;
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity 0.45s ease, transform 0.45s ease;
   }
-  body.loaded {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  body.loaded { opacity:1; transform:translateY(0); }
 
   .light {
-    position: fixed;
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
+    position: fixed; width: 500px; height: 500px; border-radius: 50%;
     background: radial-gradient(circle, rgba(0,180,255,0.8), transparent 70%);
-    filter: blur(100px);
-    transition: transform 0.1s ease-out;
-    z-index: 0;
+    filter: blur(100px); pointer-events: none; z-index: 0;
+    transform: translate(-250px, -250px);
   }
 
   .login-box {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
+    position: absolute; top:50%; left:50%; transform:translate(-50%,-50%);
     background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(0,255,255,0.2);
-    border-radius: 20px;
-    padding: 40px;
-    box-shadow: 0 0 30px rgba(0,255,255,0.2);
-    width: 90%;
-    max-width: 380px;
-    z-index: 1;
-    text-align: center;
-    animation: fadeUp 0.8s ease;
+    border: 1px solid rgba(0,255,255,0.14);
+    border-radius: 18px; padding: 34px; width: 92%; max-width: 420px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4); z-index: 2; text-align:center;
   }
-
-  @keyframes fadeUp {
-    from {opacity: 0; transform: translate(-50%, -40%);}
-    to {opacity: 1; transform: translate(-50%, -50%);}
+  .login-box img{ width:84px; border-radius:50%; filter: drop-shadow(0 0 12px rgba(0,200,255,0.6)); }
+  .login-box h2{ color:#00e0ff; margin:14px 0 18px; text-shadow:0 0 10px rgba(0,200,255,0.6); }
+  .login-box input{
+    width:100%; padding:12px; margin:10px 0; border:none; border-radius:10px;
+    background: rgba(255,255,255,0.08); color: #fff; outline:none; font-size:14px;
   }
-
-  .login-box img {
-    width: 90px;
-    border-radius: 50%;
-    filter: drop-shadow(0 0 15px rgba(0,255,255,0.8));
+  .login-box button{
+    width:100%; padding:12px; margin-top:8px; border-radius:10px; border:none;
+    background:#00bfff; color:#fff; font-weight:700; cursor:pointer; transition: .18s;
   }
+  .login-box button:hover{ transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,200,255,0.12); }
+  .error{ color:#ff9b9b; margin-top:12px; font-weight:600; min-height:20px; }
+  .back-btn{ display:inline-block; margin-top:14px; color:#aeefff; text-decoration:none; font-weight:600; }
 
-  .login-box h2 {
-    color: #00e0ff;
-    margin: 15px 0 25px;
-    text-shadow: 0 0 15px rgba(0,200,255,0.8);
-  }
-
-  .login-box input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 10px;
-    outline: none;
-    background: rgba(255,255,255,0.1);
-    color: white;
-  }
-
-  .login-box button {
-    background: #00bfff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-    width: 100%;
-    margin-top: 10px;
-    font-weight: 600;
-  }
-
-  .login-box button:hover {
-    background: #00ffff;
-    box-shadow: 0 0 15px #00ffff;
-  }
-
-  .back-btn {
-    margin-top: 20px;
-    display: inline-block;
-    color: #00e0ff;
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  .error {
-    color: #ff8080;
-    margin-top: 10px;
-    font-weight: 600;
+  @media (max-width:480px){
+    .login-box{ padding:22px; }
   }
 </style>
 </head>
 <body>
-  <div class="light"></div>
+  <div class="light" id="light"></div>
 
-  <div class="login-box">
-    <img src="https://cdn.discordapp.com/attachments/1421439220140216380/1430933652136525957/cropped_circle_image_1.png?ex=68fce5d0&is=68fb9450&hm=c5c96261773a625355f416b331614690b442d0bedb2db813436b2a5d215a7a72&" alt="Logo OSIS">
-    <h2>Login Admin</h2>
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="login()">Masuk</button>
+  <div class="login-box" role="dialog" aria-labelledby="login-title">
+    <img src="https://cdn.discordapp.com/attachments/1421439220140216380/1430933652136525957/cropped_circle_image_1.png" alt="Logo OSIS">
+    <h2 id="login-title">Login Admin</h2>
+    <input id="username" type="text" placeholder="Username" autocomplete="off" autofocus>
+    <input id="password" type="password" placeholder="Password" autocomplete="off">
+    <button id="btnLogin" type="button">Masuk</button>
     <div class="error" id="error"></div>
-    <a href="index.html" class="back-btn">← Kembali ke Beranda</a>
+    <a class="back-btn" href="index.html">← Kembali ke Beranda</a>
   </div>
 
   <script type="module">
-    // --- Efek lampu mengikuti mouse ---
-    const light = document.querySelector('.light');
-    document.addEventListener('mousemove', e => {
-      light.style.transform = `translate(${e.clientX - 250}px, ${e.clientY - 250}px)`;
-    });
-
-    // --- Firebase Configuration ---
+    // (Opsional) Firebase init - dimasukkan tapi tidak dipakai untuk auth (tetap login manual)
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
     import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
-
     const firebaseConfig = {
       apiKey: "AIzaSyDAvmSiSgfijLYb1_e8p1mf5rA8oaYpG1Y",
       authDomain: "osis-asstamayana.firebaseapp.com",
@@ -145,41 +79,62 @@
       appId: "1:487901502731:web:e0ed0778bb4c796bd2960e",
       measurementId: "G-TJ8W5XV0GH"
     };
-
-    // --- Inisialisasi Firebase ---
     const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-    console.log("✅ Firebase berhasil diinisialisasi.");
+    try { getAnalytics(app); } catch(e) { /* analytics may not run on file:// */ }
 
-    // --- Login Manual ---
-    function login() {
-      const user = document.getElementById('username').value.trim();
-      const pass = document.getElementById('password').value.trim();
-      const err = document.getElementById('error');
+    // --- login manual (username/password) ---
+    const USER = "admin";
+    const PASS = "osis2025"; // sesuai permintaanmu
 
-      if (user === "admin" && pass === "osis123") {
-        document.body.style.transition = "opacity 0.5s ease";
+    const usernameEl = document.getElementById('username');
+    const passwordEl = document.getElementById('password');
+    const errorEl = document.getElementById('error');
+    const btn = document.getElementById('btnLogin');
+    const light = document.getElementById('light');
+
+    // smooth follow effect (improved) so cahaya nggak ketinggalan
+    let mouseX = -250, mouseY = -250, lx = -250, ly = -250;
+    document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+    function anim() {
+      lx += (mouseX - lx) * 0.12;
+      ly += (mouseY - ly) * 0.12;
+      light.style.transform = `translate(${lx - (light.offsetWidth/2)}px, ${ly - (light.offsetHeight/2)}px)`;
+      requestAnimationFrame(anim);
+    }
+    requestAnimationFrame(anim);
+
+    function doLogin() {
+      const u = usernameEl.value.trim();
+      const p = passwordEl.value.trim();
+      errorEl.textContent = '';
+      if (!u || !p) {
+        errorEl.textContent = 'Isi username dan password.';
+        return;
+      }
+      if (u === USER && p === PASS) {
+        // set sessionStorage supaya dashboard bisa cek autentikasi sederhana
+        sessionStorage.setItem('osis_admin_auth', 'true');
+        // animasi keluar
+        document.body.style.transition = "opacity .4s ease";
         document.body.style.opacity = 0;
         setTimeout(() => {
           window.location.href = "dashboard.html";
-        }, 500);
+        }, 420);
       } else {
-        err.textContent = "❌ Username atau password salah!";
+        errorEl.textContent = '❌ Username atau password salah!';
       }
     }
 
-    // Tekan Enter langsung login
-    document.addEventListener("keydown", function(e) {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        login();
-      }
+    btn.addEventListener('click', doLogin);
+    // Enter bekerja di kedua input
+    [usernameEl, passwordEl].forEach(el => {
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter') { e.preventDefault(); doLogin(); }
+      });
     });
 
-    // Animasi fade-in saat load
-    window.addEventListener('load', () => {
-      document.body.classList.add('loaded');
-    });
+    // animate fade-in
+    window.addEventListener('load', () => { document.body.classList.add('loaded'); });
   </script>
 </body>
 </html>
