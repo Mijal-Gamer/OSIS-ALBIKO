@@ -104,6 +104,12 @@
     text-decoration: none;
     font-weight: 600;
   }
+
+  .error {
+    color: #ff8080;
+    margin-top: 10px;
+    font-weight: 600;
+  }
 </style>
 </head>
 <body>
@@ -115,30 +121,48 @@
     <input type="text" id="username" placeholder="Username">
     <input type="password" id="password" placeholder="Password">
     <button onclick="login()">Masuk</button>
+    <div class="error" id="error"></div>
     <a href="index.html" class="back-btn">← Kembali ke Beranda</a>
   </div>
 
-  <script>
+  <script type="module">
+    // Efek lampu
     const light = document.querySelector('.light');
     document.addEventListener('mousemove', e => {
       light.style.transform = `translate(${e.clientX - 250}px, ${e.clientY - 250}px)`;
     });
 
-    // Fungsi Login
+    // --- Firebase Config (aktif tapi nggak ganggu login manual) ---
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-analytics.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDAvmSiSgfijLYb1_e8p1mf5rA8oaYpG1Y",
+      authDomain: "osis-asstamayana.firebaseapp.com",
+      projectId: "osis-asstamayana",
+      storageBucket: "osis-asstamayana.firebasestorage.app",
+      messagingSenderId: "487901502731",
+      appId: "1:487901502731:web:e0ed0778bb4c796bd2960e",
+      measurementId: "G-TJ8W5XV0GH"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    getAnalytics(app);
+
+    // --- Login Manual ---
     function login() {
       const user = document.getElementById('username').value.trim();
       const pass = document.getElementById('password').value.trim();
+      const err = document.getElementById('error');
 
-      // Username & Password default
-      if (user === "admin" && pass === "osis2025") {
-        // Animasi keluar
+      if (user === "admin" && pass === "osis123") {
         document.body.style.transition = "opacity 0.5s ease";
         document.body.style.opacity = 0;
         setTimeout(() => {
           window.location.href = "dashboard.html";
         }, 500);
       } else {
-        alert("❌ Username atau password salah!");
+        err.textContent = "❌ Username atau password salah!";
       }
     }
 
