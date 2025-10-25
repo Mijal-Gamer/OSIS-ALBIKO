@@ -1,53 +1,90 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Admin</title>
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #020024, #090979, #00d4ff);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .login-box {
-      background: rgba(0,0,0,0.6);
-      padding: 2em;
-      border-radius: 20px;
-      box-shadow: 0 0 15px #00d4ff;
-      text-align: center;
-      width: 300px;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border: none;
-      border-radius: 10px;
-      outline: none;
-    }
-    button {
-      background: #00d4ff;
-      color: black;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin OSIS Astamayana</title>
+<link rel="icon" type="image/png" href="https://cdn.discordapp.com/attachments/1421439220140216380/1430933652136525957/cropped_circle_image_1.png">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+  body{
+    background:radial-gradient(circle at center,#08122a,#020409);
+    color:white;
+    min-height:100vh;
+    overflow:hidden;
+  }
+  .light{
+    position:fixed;width:500px;height:500px;
+    border-radius:50%;background:radial-gradient(circle,rgba(0,180,255,0.8),transparent 70%);
+    filter:blur(100px);transition:transform 0.1s ease-out;z-index:0;
+  }
+  .login-box{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(0,255,255,0.2);
+    border-radius:20px;padding:40px;
+    box-shadow:0 0 30px rgba(0,255,255,0.2);
+    width:90%;max-width:380px;z-index:1;text-align:center;
+  }
+  .login-box img{
+    width:90px;border-radius:50%;
+    filter:drop-shadow(0 0 15px rgba(0,255,255,0.8));
+  }
+  .login-box h2{
+    color:#00e0ff;margin:15px 0 25px;
+    text-shadow:0 0 15px rgba(0,200,255,0.8);
+  }
+  .login-box input{
+    width:100%;padding:10px;margin:10px 0;
+    border:none;border-radius:10px;outline:none;
+    background:rgba(255,255,255,0.1);color:white;
+  }
+  .login-box button{
+    background:#00bfff;border:none;padding:10px 20px;
+    border-radius:10px;color:white;cursor:pointer;
+    transition:0.3s;width:100%;margin-top:10px;
+  }
+  .login-box button:hover{
+    background:#00ffff;box-shadow:0 0 15px #00ffff;
+  }
+  .back-btn{
+    margin-top:20px;display:inline-block;
+    color:#00e0ff;text-decoration:none;font-weight:600;
+  }
+</style>
 </head>
 <body>
+  <div class="light"></div>
+
   <div class="login-box">
+    <img src="https://cdn.discordapp.com/attachments/1421439220140216380/1430933652136525957/cropped_circle_image_1.png" alt="Logo OSIS">
     <h2>Login Admin</h2>
-    <form action="dashboard.php" method="POST">
-      <input type="text" name="username" placeholder="Username" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <button type="submit">Masuk</button>
-    </form>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Masuk</button>
+    <a href="index.html" class="back-btn">← Kembali ke Beranda</a>
   </div>
+
+  <script>
+    const light=document.querySelector('.light');
+    document.addEventListener('mousemove',e=>{
+      light.style.transform=`translate(${e.clientX-250}px,${e.clientY-250}px)`;
+    });
+
+    function login(){
+      const user=document.getElementById('username').value;
+      const pass=document.getElementById('password').value;
+      
+      // username & password bisa kamu ubah di sini
+      if(user==="admin" && pass==="osis2025"){
+        alert("Login berhasil!");
+        window.location.href="dashboard.html"; // ganti ke halaman dashboard nanti
+      }else{
+        alert("Username atau password salah!");
+      }
+    }
+  </script>
 </body>
 </html>
