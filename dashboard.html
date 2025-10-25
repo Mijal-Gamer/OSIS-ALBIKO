@@ -164,10 +164,10 @@
 
   <script>
     // 🧱 Cek login
-    const ok = localStorage.getItem('osis_admin_auth');
-    if (!isLoggedIn) {
-      window.location.href = "admin.html";
-    }
+   const ok = localStorage.getItem('osis_admin_auth');
+if (ok !== 'true') {
+  window.location.href = "admin.html";
+}
 
     // 🌈 Efek cahaya smooth ngikutin mouse
     const light = document.querySelector('.light');
@@ -189,13 +189,14 @@
 
     // 🚪 Logout balik ke admin.html
     function logout() {
-      sessionStorage.removeItem('loggedIn');
-      document.body.style.transition = "opacity 0.5s ease";
-      document.body.style.opacity = 0;
-      setTimeout(() => {
-        window.location.href = "admin.html";
-      }, 500);
-    }
+  localStorage.removeItem('osis_admin_auth');
+  document.body.style.transition = "opacity 0.5s ease";
+  document.body.style.opacity = 0;
+  setTimeout(() => {
+    window.location.href = "admin.html";
+  }, 500);
+}
+
 
     // ✨ Animasi fade-in
     window.addEventListener('load', () => {
