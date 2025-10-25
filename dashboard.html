@@ -110,13 +110,15 @@
   }
 
   .light {
-    position: fixed;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 600px;
     height: 600px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(0,180,255,0.6), transparent 70%);
     filter: blur(120px);
-    transition: transform 0.1s ease-out;
+    pointer-events: none;
     z-index: 0;
   }
 
@@ -160,10 +162,23 @@
   </footer>
 
   <script>
-   const light = document.querySelector('.light');
+    // Efek cahaya smooth ngikutin mouse
+    const light = document.querySelector('.light');
+    let mouseX = 0, mouseY = 0;
+    let lightX = 0, lightY = 0;
+
     document.addEventListener('mousemove', e => {
-      light.style.transform = `translate(${e.clientX - 250}px, ${e.clientY - 250}px)`;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     });
+
+    function animateLight() {
+      lightX += (mouseX - lightX) * 0.1;
+      lightY += (mouseY - lightY) * 0.1;
+      light.style.transform = `translate(${lightX - light.offsetWidth / 2}px, ${lightY - light.offsetHeight / 2}px)`;
+      requestAnimationFrame(animateLight);
+    }
+    requestAnimationFrame(animateLight);
 
     // Logout balik ke login
     function logout() {
