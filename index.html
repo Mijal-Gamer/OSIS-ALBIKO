@@ -312,9 +312,25 @@
     more.classList.toggle('show',visible);
     toggleBtn.textContent=visible?'Tutup':'Lihat Selengkapnya';
   });
+
+  // 🔥 Animasi transisi ke halaman Admin
+const adminBtn = document.querySelector('.admin-btn');
+
+adminBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  document.body.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  document.body.style.opacity = '0';
+  document.body.style.transform = 'translateY(-20px)';
+  
+  setTimeout(() => {
+    window.location.href = adminBtn.getAttribute('href');
+  }, 600); // pindah halaman setelah animasi selesai
+});
+
 </script>
 
 </body>
 </html>
+
 
 
