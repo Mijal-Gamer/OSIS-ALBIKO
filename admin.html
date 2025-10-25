@@ -113,7 +113,7 @@
       }
       if (u === USER && p === PASS) {
         // set sessionStorage supaya dashboard bisa cek autentikasi sederhana
-        sessionStorage.setItem('osis_admin_auth', 'true');
+        localStorage.setItem('osis_admin_auth', 'true');
         // animasi keluar
         document.body.style.transition = "opacity .4s ease";
         document.body.style.opacity = 0;
