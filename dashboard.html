@@ -164,7 +164,7 @@
 
   <script>
     // 🧱 Cek login
-    const isLoggedIn = sessionStorage.getItem('loggedIn');
+    const ok = localStorage.getItem('osis_admin_auth');
     if (!isLoggedIn) {
       window.location.href = "admin.html";
     }
