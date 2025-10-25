@@ -92,16 +92,9 @@
     const btn = document.getElementById('btnLogin');
     const light = document.getElementById('light');
 
-    // smooth follow effect (improved) so cahaya nggak ketinggalan
-    let mouseX = -250, mouseY = -250, lx = -250, ly = -250;
-    document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
-    function anim() {
-      lx += (mouseX - lx) * 0.12;
-      ly += (mouseY - ly) * 0.12;
-      light.style.transform = `translate(${lx - (light.offsetWidth/2)}px, ${ly - (light.offsetHeight/2)}px)`;
-      requestAnimationFrame(anim);
-    }
-    requestAnimationFrame(anim);
+    document.addEventListener('mousemove', e => {
+  light.style.transform = `translate(${e.clientX - 250}px, ${e.clientY - 250}px)`;
+});
 
     function doLogin() {
       const u = usernameEl.value.trim();
