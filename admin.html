@@ -48,6 +48,12 @@
     max-width: 380px;
     z-index: 1;
     text-align: center;
+    animation: fadeUp 0.8s ease;
+  }
+
+  @keyframes fadeUp {
+    from {opacity: 0; transform: translate(-50%, -40%);}
+    to {opacity: 1; transform: translate(-50%, -50%);}
   }
 
   .login-box img {
@@ -118,13 +124,15 @@
       light.style.transform = `translate(${e.clientX - 250}px, ${e.clientY - 250}px)`;
     });
 
-    // Login function
+    // Fungsi Login
     function login() {
       const user = document.getElementById('username').value.trim();
       const pass = document.getElementById('password').value.trim();
 
       // Username & Password default
       if (user === "admin" && pass === "osis2025") {
+        // Animasi keluar
+        document.body.style.transition = "opacity 0.5s ease";
         document.body.style.opacity = 0;
         setTimeout(() => {
           window.location.href = "dashboard.html";
