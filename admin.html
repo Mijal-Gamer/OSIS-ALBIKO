@@ -166,10 +166,13 @@
       }
     }
 
-    // Tekan Enter langsung login
-    document.addEventListener("keypress", function(e) {
-      if (e.key === "Enter") login();
-    });
+   // Tekan Enter langsung login
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    e.preventDefault(); // biar nggak reload halaman
+    login();
+  }
+});
 
     // Animasi fade-in
     window.addEventListener('load', () => {
