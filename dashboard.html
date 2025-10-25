@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard Admin | OSIS Astamayana</title>
 <link rel="icon" type="image/png" href="https://cdn.discordapp.com/attachments/1421439220140216380/1430933652136525957/cropped_circle_image_1.png?ex=68fce5d0&is=68fb9450&hm=c5c96261773a625355f416b331614690b442d0bedb2db813436b2a5d215a7a72&">
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
   * {margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif;}
@@ -162,7 +163,13 @@
   </footer>
 
   <script>
-    // Efek cahaya smooth ngikutin mouse
+    // 🧱 Cek login
+    const isLoggedIn = sessionStorage.getItem('loggedIn');
+    if (!isLoggedIn) {
+      window.location.href = "admin.html";
+    }
+
+    // 🌈 Efek cahaya smooth ngikutin mouse
     const light = document.querySelector('.light');
     let mouseX = 0, mouseY = 0;
     let lightX = 0, lightY = 0;
@@ -180,8 +187,9 @@
     }
     requestAnimationFrame(animateLight);
 
-    // Logout balik ke login
+    // 🚪 Logout balik ke admin.html
     function logout() {
+      sessionStorage.removeItem('loggedIn');
       document.body.style.transition = "opacity 0.5s ease";
       document.body.style.opacity = 0;
       setTimeout(() => {
@@ -189,7 +197,7 @@
       }, 500);
     }
 
-    // Animasi fade-in
+    // ✨ Animasi fade-in
     window.addEventListener('load', () => {
       document.body.classList.add('loaded');
     });
