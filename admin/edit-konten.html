@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Konten | OSIS Astamayana</title>
+  <link rel="stylesheet" href="assets/admin-style.css">
+</head>
+<body>
+  <header class="admin-header">
+    <h1>✏️ Edit Konten Website</h1>
+    <a href="admin.html" class="back-btn">⬅ Kembali</a>
+  </header>
+
+  <main class="content-container">
+    <section class="edit-section">
+      <h2>Tentang OSIS</h2>
+      <textarea id="tentangInput" rows="6" placeholder="Tulis deskripsi OSIS di sini..."></textarea>
+      <button id="saveTentang">💾 Simpan</button>
+    </section>
+
+    <section class="edit-section">
+      <h2>Struktur Organisasi</h2>
+      <textarea id="strukturInput" rows="6" placeholder="Tulis struktur OSIS di sini..."></textarea>
+      <button id="saveStruktur">💾 Simpan</button>
+    </section>
+  </main>
+
+  <script type="module">
+    import { db } from "./assets/firebase-config.js";
+    import { ref, get, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+    // Ambil referensi ke database
+    const tentangRef = ref(db, "konten/tentang");
+    const strukturRef = ref(db, "konten/struktur");
+
+    // Elemen HTML
+    const tentangInput = document.getElementById("tentangInput");
+    const strukturInput = document.getElementById("strukturInput");
+
+    // Ambil data awal
+    async function loadData() {
+      const snapshotTentang = await get(tentangRef);
+      if (snapshotTentang.exists()) {
+        tentangInput.value = snapshotTentang.val();
+      }
+
+      const snapshotStruktur = await get(strukturRef);
+      if (snapshotStruktur.exists()) {
+        strukturInput.value = snapshotStruktur.val();
+      }
+    }
+
+    loadData();
+
+    // Simpan perubahan
+    document.getElementById("saveTentang").addEventListener("click", async () => {
+      await set(tentangRef, tentangInput.value);
+      alert("✅ Konten 'Tentang OSIS' berhasil disimpan!");
+    });
+
+    document.getElementById("saveStruktur").addEventListener("click", async () => {
+      await set(strukturRef, strukturInput.value);
+      alert("✅ Konten 'Struktur Organisasi' berhasil disimpan!");
+    });
+  </script>
+</body>
+</html>
