@@ -18,11 +18,10 @@ $isAjax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $password_hash = hash('sha256', $password); // Hash password untuk security
 
     // Use prepared statement (aman dari SQL Injection)
     $stmt = mysqli_prepare($conn_auth, "SELECT * FROM users WHERE username=? AND password=? LIMIT 1");
-    mysqli_stmt_bind_param($stmt, "ss", $username, $password_hash);
+    mysqli_stmt_bind_param($stmt, "ss", $username, $password);
     mysqli_stmt_execute($stmt);
     $res = mysqli_stmt_get_result($stmt);
 
