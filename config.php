@@ -32,8 +32,8 @@ if ($is_localhost) {
 
 // Common configuration for all environments
 define('SITE_NAME', 'OSIS Astamayana');
-define('DB_MAIN', 'osis');
-define('DB_AUTH', 'osis_auth');
+define('DB_MAIN', 'wwoiodev_osis');
+define('DB_AUTH', 'wwoiodev_osis_auth');
 
 // Security
 define('HASH_ALGORITHM', 'sha256');
