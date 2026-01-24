@@ -509,6 +509,23 @@ $diagnostics['overall_status'] = $all_critical_passed ? 'HEALTHY ✅' : 'HAS ISS
             transition: all 0.3s ease;
             animation: slideInUp 0.5s ease-out backwards;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .check-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .check-card:hover::before {
+            left: 100%;
         }
 
         .check-card:nth-child(1) { animation-delay: 0.05s; }
@@ -537,7 +554,8 @@ $diagnostics['overall_status'] = $all_critical_passed ? 'HEALTHY ✅' : 'HAS ISS
 
         .check-card.passed:hover {
             background: rgba(0, 50, 40, 0.9);
-            box-shadow: 0 15px 40px rgba(0, 212, 119, 0.2);
+            box-shadow: 0 15px 40px rgba(0, 212, 119, 0.25);
+            border-color: rgba(0, 212, 119, 0.4);
         }
 
         .check-card.failed {
@@ -547,12 +565,18 @@ $diagnostics['overall_status'] = $all_critical_passed ? 'HEALTHY ✅' : 'HAS ISS
 
         .check-card.failed:hover {
             background: rgba(60, 20, 20, 0.9);
-            box-shadow: 0 15px 40px rgba(255, 71, 87, 0.2);
+            box-shadow: 0 15px 40px rgba(255, 71, 87, 0.25);
+            border-color: rgba(255, 71, 87, 0.4);
         }
 
         .check-card.info {
             border-left-color: #00a8ff;
             background: rgba(0, 30, 50, 0.8);
+        }
+
+        .check-card.info:hover {
+            box-shadow: 0 15px 40px rgba(0, 168, 255, 0.25);
+            border-color: rgba(0, 168, 255, 0.4);
         }
 
         .check-card h3 {
@@ -563,6 +587,19 @@ $diagnostics['overall_status'] = $all_critical_passed ? 'HEALTHY ✅' : 'HAS ISS
             gap: 10px;
             font-size: 18px;
             text-shadow: 0 2px 8px rgba(0, 200, 255, 0.2);
+        }
+
+        .check-card h3 i {
+            font-size: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .check-card:hover h3 i {
+            transform: rotate(10deg) scale(1.15);
+            text-shadow: 0 0 15px rgba(0, 200, 255, 0.6);
         }
 
         .check-card p {

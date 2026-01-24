@@ -599,6 +599,13 @@ if ($result) {
                 <p>Buka website publik untuk melihat tampilan website secara keseluruhan</p>
                 <a href="index.php">Buka Website →</a>
             </div>
+
+            <div class="dashboard-card">
+                <i class="ri-stethoscope-line"></i>
+                <h3>System Diagnostic</h3>
+                <p>Periksa kesehatan sistem, status database, dan konfigurasi server</p>
+                <a href="diagnostic.php">Buka Diagnostic →</a>
+            </div>
         </div>
 
         <footer>
