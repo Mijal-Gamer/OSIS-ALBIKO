@@ -18,9 +18,13 @@ $isAjax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $password_hash = hash('sha256', $password); // Hash password untuk security
 
-    $q = "SELECT * FROM users WHERE username='$username' AND password='$password' LIMIT 1";
-    $res = mysqli_query($conn_auth, $q);
+    // Use prepared statement (aman dari SQL Injection)
+    $stmt = mysqli_prepare($conn_auth, "SELECT * FROM users WHERE username=? AND password=? LIMIT 1");
+    mysqli_stmt_bind_param($stmt, "ss", $username, $password_hash);
+    mysqli_stmt_execute($stmt);
+    $res = mysqli_stmt_get_result($stmt);
 
     if ($res && mysqli_num_rows($res) === 1) {
         $user = mysqli_fetch_assoc($res);
@@ -28,9 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Generate unique token
         $token = bin2hex(random_bytes(32));
         
-        // Save token to database
-        $updateQ = "UPDATE users SET token='$token' WHERE id={$user['id']}";
-        mysqli_query($conn_auth, $updateQ);
+        // Save token to database (gunakan prepared statement)
+        $updateStmt = mysqli_prepare($conn_auth, "UPDATE users SET token=? WHERE id=?");
+        mysqli_stmt_bind_param($updateStmt, "si", $token, $user['id']);
+        mysqli_stmt_execute($updateStmt);
         
         // Set token to COOKIE (accessible across all Chrome profiles)
         setcookie('osis_token', $token, 0, '/', '', false, true);
@@ -59,6 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         }
     }
+    
+    mysqli_stmt_close($stmt);
 }
 ?>
 <!DOCTYPE html>
