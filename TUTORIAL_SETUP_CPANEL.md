@@ -116,80 +116,44 @@ Di cPanel Dashboard:
 1. Cari **"MySQL Databases"** atau **"Manage My Databases"**
 2. Klik untuk membuka
 
-### 3.2 Create Database 1: osis_auth
+### 3.2 Database Sudah Ada di Hosting ✅
 
-1. Di bagian **"Create New Database"**
-2. Isikan nama: `osis_auth`
-   ```
-   Prefix otomatis akan ditambahkan: cpuser_osis_auth
-   Gunakan nama lengkap dengan prefix!
-   ```
-3. Klik **"Create Database"**
-4. Tunggu notifikasi "Database created successfully"
+⚠️ **Hosting sudah membuat database!** Anda bisa skip step ini.
 
-### 3.3 Create Database 2: osis
-
-1. Ulangi Step 3.2
-2. Isikan nama: `osis`
-   ```
-   Nama lengkap: cpuser_osis
-   ```
-3. Klik **"Create Database"**
-
-**Hasil:**
+**Database yang sudah ada:**
 ```
-Databases Created:
-✅ cpuser_osis_auth
-✅ cpuser_osis
+✅ wwoiodev_osis_auth
+✅ wwoiodev_osis
 ```
+
+Kedua database sudah siap digunakan untuk project OSIS Astamayana!
 
 ---
 
 ## Step 4: Create Database User
 
-### 4.1 Buat User Database
+### 4.1 Minta Database Credentials ke Hosting
 
-1. Masih di halaman "MySQL Databases"
-2. Scroll ke bagian **"MySQL Users"** atau **"Add New User"**
-3. Isikan:
-   - **Username:** `osis_user`
-   - **Password:** [Generate Strong Password atau buat sendiri]
-     - Contoh: `Osis@2024Secure!`
-   - **Password (confirm):** [Ulangi password]
+⚠️ **Hosting sudah membuat database user!**
 
-⚠️ **SIMPAN PASSWORD INI!** Dibutuhkan di langkah berikutnya.
-
-4. Klik **"Create User"**
-
-**Catat:**
+Hubungi hosting support atau cek email untuk mendapatkan:
 ```
-Username: cpuser_osis_user
-Password: [Simpan di tempat aman]
+Database Username: ?
+Database Password: ?
+Database Host: localhost (biasanya)
 ```
 
-### 4.2 Assign User to Databases
+### 4.2 Catat Credentials
 
-1. Masih di halaman yang sama
-2. Scroll ke bagian **"Add User To Database"**
-3. Pilih user: `cpuser_osis_user`
-4. Pilih database: `cpuser_osis_auth`
-5. Klik **"Add"**
-6. **PENTING:** Centang **"ALL PRIVILEGES"**
-7. Klik **"Make Changes"**
-
-Ulangi untuk database `cpuser_osis`:
-1. Pilih user: `cpuser_osis_user`
-2. Pilih database: `cpuser_osis`
-3. Klik **"Add"**
-4. Centang **"ALL PRIVILEGES"**
-5. Klik **"Make Changes"**
-
-**Hasil:**
+Setelah dapat dari hosting, catat:
 ```
-User Privileges:
-✅ cpuser_osis_user → cpuser_osis_auth (ALL)
-✅ cpuser_osis_user → cpuser_osis (ALL)
+Username: [Database username dari hosting]
+Password: [Database password dari hosting]
+Database 1: wwoiodev_osis_auth
+Database 2: wwoiodev_osis
 ```
+
+⚠️ Simpan baik-baik, dibutuhkan di Step 5!
 
 ---
 
@@ -218,8 +182,14 @@ define('DB_PASS', 'your_secure_password');
 ```php
 // PRODUCTION (osis-astamayana.space)
 define('DB_HOST', 'localhost');
-define('DB_USER', 'cpuser_osis_user');         // Username dari Step 4
-define('DB_PASS', 'Osis@2024Secure!');         // Password dari Step 4
+define('DB_USER', '[Username dari hosting]');  // Ganti dengan username dari Step 4
+define('DB_PASS', '[Password dari hosting]');  // Ganti dengan password dari Step 4
+```
+
+**Contoh (sesuai dengan database Anda):**
+```php
+define('DB_USER', 'wwoiodev_user');        // Username database dari hosting
+define('DB_PASS', 'password123');          // Password database dari hosting
 ```
 
 ### 5.3 Save File
@@ -239,10 +209,10 @@ Di cPanel Dashboard:
 1. Cari **"phpMyAdmin"**
 2. Klik untuk membuka (akan membuka tab baru)
 
-### 6.2 Select Database osis_auth
+### 6.2 Select Database wwoiodev_osis_auth
 
 1. Di sidebar kiri phpMyAdmin
-2. Klik database **`cpuser_osis_auth`**
+2. Klik database **`wwoiodev_osis_auth`**
 3. Database terbuka (akan kosong/belum ada tables)
 
 ### 6.3 Import Database Structure
@@ -325,7 +295,7 @@ INSERT INTO `struktur_organisasi` (`tipe`, `kategori`, `nama`, `posisi`, `urutan
 
 Setelah query berhasil:
 1. Refresh phpMyAdmin
-2. Di sidebar, buka database `cpuser_osis_auth`
+2. Di sidebar, buka database `wwoiodev_osis_auth`
 3. Verify tables ada:
    ```
    ✅ users
@@ -333,9 +303,9 @@ Setelah query berhasil:
    ✅ galeri
    ```
 
-### 6.6 Repeat untuk Database osis
+### 6.6 Repeat untuk Database wwoiodev_osis
 
-1. Klik database **`cpuser_osis`** di sidebar
+1. Klik database **`wwoiodev_osis`** di sidebar
 2. Jalankan query yang sama (atau biarkan kosong jika tidak diperlukan)
 
 ---
@@ -408,10 +378,10 @@ Pastikan muncul:
 
 ```
 Database Setup:
-☐ Create database cpuser_osis_auth
-☐ Create database cpuser_osis
-☐ Create user cpuser_osis_user
-☐ Assign user dengan ALL PRIVILEGES ke kedua database
+☐ Database wwoiodev_osis_auth sudah ada ✅
+☐ Database wwoiodev_osis sudah ada ✅
+☐ Minta database username & password ke hosting
+☐ Verify user assigned ke kedua database
 ☐ Update config.php dengan database credentials
 
 Database Tables:
@@ -502,6 +472,6 @@ Jika semua step selesai tanpa error, **OSIS Astamayana production website sudah 
 
 - Website: https://osis-astamayana.space/
 - Admin: https://osis-astamayana.space/dashboard.php
-- Database: cpuser_osis_auth (prod), cpuser_osis (backup)
+- Database: wwoiodev_osis_auth (production), wwoiodev_osis (main)
 
 **Selamat!** Website OSIS Astamayana sudah berjalan di hosting! 🚀
