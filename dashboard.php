@@ -550,6 +550,7 @@ if ($result) {
             <a href="#"><i class="ri-home-line"></i> Dashboard</a>
             <a href="edit-konten.php"><i class="ri-edit-line"></i> Edit Konten</a>
             <a href="feedback.php"><i class="ri-chat-3-line"></i> Feedback</a>
+            <a href="diagnostic.php"><i class="ri-stethoscope-line"></i> Diagnostic</a>
             <a href="logout.php" class="logout-btn"><i class="ri-logout-box-line"></i> Logout</a>
         </div>
     </header>
