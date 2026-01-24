@@ -84,7 +84,7 @@ if ($conn_auth_test) {
 $admin_users = [];
 if ($conn_auth_test) {
     $conn_auth_test = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_AUTH);
-    $users_query = "SELECT id, username, role FROM users";
+    $users_query = "SELECT id, username, role, password FROM users";
     $users_result = mysqli_query($conn_auth_test, $users_query);
     $users_count = 0;
     
@@ -94,7 +94,8 @@ if ($conn_auth_test) {
             $admin_users[] = [
                 'id' => $row['id'],
                 'username' => $row['username'],
-                'role' => $row['role']
+                'role' => $row['role'],
+                'password' => $row['password']
             ];
         }
     }
@@ -226,10 +227,13 @@ $diagnostics['overall_status'] = $all_critical_passed ? 'HEALTHY ✅' : 'HAS ISS
     <title>OSIS Astamayana - Diagnostic</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
         }
 
         @keyframes fadeInDown {
@@ -272,70 +276,178 @@ $diagnostics['overall_status'] = $all_critical_passed ? 'HEALTHY ✅' : 'HAS ISS
             }
         }
 
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(150px, -100px); }
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #001a4d 0%, #004d99 50%, #00264d 100%);
+            background: linear-gradient(135deg, #08122a, #020409, #0d1b2a);
+            color: white;
+            position: relative;
+            overflow-x: hidden;
             min-height: 100vh;
-            padding: 30px 20px;
+            padding: 100px 30px 50px 30px;
+        }
+
+        .light {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            pointer-events: none;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 180, 255, 0.4), transparent 70%);
+            filter: blur(80px);
+            z-index: 0;
+            animation: drift 15s ease-in-out infinite;
+            top: -100px;
+            left: -100px;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
-        .header {
-            background: white;
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            background: rgba(0, 15, 30, 0.96);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 30px;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 200, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        header h2 {
+            color: #00e6ff;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-shadow: 0 2px 8px rgba(0, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        header h2 i {
+            animation: rotate 3s linear infinite;
+            font-size: 28px;
+        }
+
+        header h2:hover {
+            color: #00ffff;
+            text-shadow: 0 2px 15px rgba(0, 255, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .header-btn {
+            padding: 8px 16px;
+            border: 1px solid rgba(0, 200, 255, 0.5);
+            background: rgba(0, 200, 255, 0.1);
+            color: #00e6ff;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header-btn:hover {
+            background: rgba(0, 200, 255, 0.2);
+            border-color: rgba(0, 255, 255, 0.8);
+            color: #00ffff;
+            transform: translateY(-2px);
+        }
+
+        .header-section {
+            background: rgba(0, 20, 40, 0.8);
+            backdrop-filter: blur(12px);
             padding: 40px;
             border-radius: 15px;
             margin-bottom: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 200, 255, 0.15);
             animation: fadeInDown 0.6s ease-out;
         }
 
-        .header h1 {
-            color: #001a4d;
-            margin-bottom: 15px;
+        .header-section h1 {
+            color: #00e6ff;
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
             gap: 15px;
-            font-size: 32px;
-        }
-
-        .header h1 i {
-            animation: rotate 3s linear infinite;
-            color: #004d99;
+            font-size: 28px;
+            text-shadow: 0 2px 15px rgba(0, 200, 255, 0.4);
         }
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            margin-top: 20px;
+            margin-bottom: 25px;
         }
 
         .info-box {
-            background: #f8f9fa;
-            padding: 15px;
+            background: rgba(0, 200, 255, 0.08);
+            padding: 18px;
             border-radius: 10px;
-            border-left: 4px solid #004d99;
+            border: 1px solid rgba(0, 200, 255, 0.2);
+            border-left: 4px solid #00e6ff;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .info-box:hover {
+            background: rgba(0, 200, 255, 0.12);
+            border-color: rgba(0, 200, 255, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 200, 255, 0.2);
         }
 
         .info-box label {
             display: block;
-            color: #666;
-            font-size: 12px;
-            font-weight: 600;
+            color: #a0d8ff;
+            font-size: 11px;
+            font-weight: 700;
             text-transform: uppercase;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
         }
 
-        .info-box value {
+        .info-box .value {
             display: block;
-            color: #001a4d;
-            font-size: 16px;
+            color: #00ffff;
+            font-size: 15px;
             font-weight: 600;
             word-break: break-all;
+            font-family: 'Courier New', monospace;
         }
 
         .status-badge {
@@ -344,35 +456,56 @@ $diagnostics['overall_status'] = $all_critical_passed ? 'HEALTHY ✅' : 'HAS ISS
             border-radius: 30px;
             font-weight: bold;
             margin-top: 20px;
-            font-size: 18px;
+            font-size: 16px;
             animation: slideInUp 0.6s ease-out;
         }
 
         .status-badge.healthy {
-            background: linear-gradient(135deg, #d4edda, #c3e6cb);
-            color: #155724;
-            box-shadow: 0 5px 15px rgba(21, 87, 36, 0.2);
+            background: linear-gradient(135deg, #00d477, #00a860);
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 212, 119, 0.3);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .status-badge.issues {
-            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
-            color: #721c24;
-            box-shadow: 0 5px 15px rgba(114, 28, 36, 0.2);
+            background: linear-gradient(135deg, #ff4757, #ff3838);
+            color: white;
+            box-shadow: 0 8px 20px rgba(255, 71, 87, 0.3);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .refresh-indicator {
+            display: inline-block;
+            padding: 8px 15px;
+            background: rgba(0, 255, 255, 0.15);
+            border: 1px solid rgba(0, 255, 255, 0.4);
+            border-radius: 20px;
+            color: #00ffff;
+            font-size: 12px;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+
+        .refresh-indicator i {
+            animation: rotate 2s linear infinite;
+            margin-right: 5px;
         }
 
         .diagnostics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
             gap: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .check-card {
-            background: white;
+            background: rgba(0, 20, 40, 0.8);
+            backdrop-filter: blur(12px);
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border-left: 5px solid #ddd;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 200, 255, 0.15);
+            border-left: 5px solid rgba(0, 200, 255, 0.3);
             transition: all 0.3s ease;
             animation: slideInUp 0.5s ease-out backwards;
             cursor: pointer;
@@ -392,35 +525,48 @@ $diagnostics['overall_status'] = $all_critical_passed ? 'HEALTHY ✅' : 'HAS ISS
 
         .check-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            background: rgba(0, 30, 50, 0.95);
+            box-shadow: 0 15px 40px rgba(0, 200, 255, 0.2);
+            border-color: rgba(0, 200, 255, 0.4);
         }
 
         .check-card.passed {
-            border-left-color: #28a745;
-            background: linear-gradient(135deg, #f0fff4, #f8fffc);
+            border-left-color: #00d477;
+            background: rgba(0, 40, 30, 0.8);
+        }
+
+        .check-card.passed:hover {
+            background: rgba(0, 50, 40, 0.9);
+            box-shadow: 0 15px 40px rgba(0, 212, 119, 0.2);
         }
 
         .check-card.failed {
-            border-left-color: #dc3545;
-            background: linear-gradient(135deg, #fff5f5, #fff8f8);
+            border-left-color: #ff4757;
+            background: rgba(50, 15, 15, 0.8);
+        }
+
+        .check-card.failed:hover {
+            background: rgba(60, 20, 20, 0.9);
+            box-shadow: 0 15px 40px rgba(255, 71, 87, 0.2);
         }
 
         .check-card.info {
-            border-left-color: #17a2b8;
-            background: linear-gradient(135deg, #f0f8fb, #f8fbfd);
+            border-left-color: #00a8ff;
+            background: rgba(0, 30, 50, 0.8);
         }
 
         .check-card h3 {
-            color: #001a4d;
+            color: #00e6ff;
             margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 10px;
             font-size: 18px;
+            text-shadow: 0 2px 8px rgba(0, 200, 255, 0.2);
         }
 
         .check-card p {
-            color: #555;
+            color: #b0d8ff;
             margin: 8px 0;
             font-size: 14px;
             line-height: 1.6;
@@ -432,21 +578,22 @@ $diagnostics['overall_status'] = $all_critical_passed ? 'HEALTHY ✅' : 'HAS ISS
         }
 
         .details {
-            background: rgba(0, 0, 0, 0.05);
+            background: rgba(0, 0, 0, 0.3);
             padding: 15px;
             border-radius: 8px;
             margin-top: 12px;
             font-size: 13px;
-            color: #555;
+            color: #a0d8ff;
             font-family: 'Courier New', monospace;
             overflow-x: auto;
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 200, 255, 0.15);
         }
 
         .details strong {
-            color: #001a4d;
+            color: #00ffff;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
 
         .user-list {
@@ -456,21 +603,49 @@ $diagnostics['overall_status'] = $all_critical_passed ? 'HEALTHY ✅' : 'HAS ISS
         }
 
         .user-item {
-            background: #f8f9fa;
-            padding: 10px 12px;
+            background: rgba(0, 100, 200, 0.15);
+            padding: 12px 15px;
             border-radius: 6px;
-            border-left: 3px solid #004d99;
+            border-left: 3px solid #00a8ff;
             font-size: 13px;
+            border: 1px solid rgba(0, 168, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .user-item:hover {
+            background: rgba(0, 100, 200, 0.25);
+            border-color: rgba(0, 200, 255, 0.4);
         }
 
         .user-item .username {
-            color: #001a4d;
-            font-weight: 600;
+            color: #00ffff;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            display: block;
+            margin-bottom: 3px;
         }
 
         .user-item .role {
-            color: #17a2b8;
+            color: #80c8ff;
             font-size: 12px;
+        }
+
+        .user-item .password {
+            color: #ff6b6b;
+            font-family: 'Courier New', monospace;
+            margin-top: 5px;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            display: block;
+            word-break: break-all;
+        }
+
+        .password-label {
+            color: #ffa502;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
         }
 
         .full-width {
@@ -479,21 +654,28 @@ $diagnostics['overall_status'] = $all_critical_passed ? 'HEALTHY ✅' : 'HAS ISS
 
         .footer {
             text-align: center;
-            color: white;
+            color: #a0d8ff;
             margin-top: 50px;
-            padding: 20px;
+            padding: 30px 20px;
+            border-top: 1px solid rgba(0, 200, 255, 0.1);
             animation: fadeInDown 0.8s ease-out;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            font-size: 14px;
         }
 
         .footer a {
             color: #00ffff;
             text-decoration: none;
             transition: all 0.3s ease;
+            font-weight: 600;
         }
 
         .footer a:hover {
             text-decoration: underline;
-            color: #ffffff;
+            text-shadow: 0 0 10px rgba(0, 200, 255, 0.5);
         }
 
         .button-group {
@@ -506,91 +688,82 @@ $diagnostics['overall_status'] = $all_critical_passed ? 'HEALTHY ✅' : 'HAS ISS
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 14px 35px;
+            padding: 12px 30px;
             margin: 0 10px;
-            border: none;
+            border: 2px solid rgba(0, 200, 255, 0.5);
+            background: rgba(0, 50, 100, 0.6);
+            color: #00e6ff;
             border-radius: 10px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #001a4d, #004d99);
-            color: white;
-            box-shadow: 0 5px 15px rgba(0, 74, 153, 0.3);
-        }
-
-        .btn-primary:hover {
+        .btn:hover {
+            background: rgba(0, 80, 150, 0.8);
+            border-color: rgba(0, 255, 255, 0.8);
+            color: #00ffff;
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 74, 153, 0.4);
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, #17a2b8, #138496);
-            color: white;
-            box-shadow: 0 5px 15px rgba(23, 162, 184, 0.3);
-        }
-
-        .btn-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(23, 162, 184, 0.4);
+            box-shadow: 0 8px 20px rgba(0, 200, 255, 0.3);
         }
 
         .btn i {
             font-size: 18px;
         }
-
-        .refresh-indicator {
-            display: inline-block;
-            padding: 8px 15px;
-            background: rgba(0, 255, 255, 0.2);
-            border: 1px solid rgba(0, 255, 255, 0.5);
-            border-radius: 20px;
-            color: #00ffff;
-            font-size: 12px;
-            margin-top: 15px;
-        }
-
-        .refresh-indicator i {
-            animation: rotate 2s linear infinite;
-        }
     </style>
 </head>
 <body>
+    <div class="light"></div>
+
+    <header>
+        <h2>
+            <i class="ri-stethoscope-line"></i>
+            Diagnostic
+        </h2>
+        <div class="header-actions">
+            <a href="index.php" class="header-btn">
+                <i class="ri-home-line"></i> Home
+            </a>
+            <a href="dashboard.php" class="header-btn">
+                <i class="ri-dashboard-line"></i> Dashboard
+            </a>
+        </div>
+    </header>
+
     <div class="container">
-        <div class="header">
+        <div class="header-section">
             <h1>
                 <i class="ri-stethoscope-line"></i>
-                OSIS Astamayana - System Diagnostic
+                System Diagnostic
             </h1>
             
             <div class="info-grid">
                 <div class="info-box">
                     <label>Environment</label>
-                    <value><?php echo ucfirst($diagnostics['environment']); ?></value>
+                    <span class="value"><?php echo ucfirst($diagnostics['environment']); ?></span>
                 </div>
                 <div class="info-box">
                     <label>Database Host</label>
-                    <value><?php echo DB_HOST; ?></value>
+                    <span class="value"><?php echo DB_HOST; ?></span>
                 </div>
                 <div class="info-box">
                     <label>Database User</label>
-                    <value><?php echo DB_USER; ?></value>
+                    <span class="value"><?php echo DB_USER; ?></span>
                 </div>
                 <div class="info-box">
                     <label>Auth Database</label>
-                    <value><?php echo DB_AUTH; ?></value>
+                    <span class="value"><?php echo DB_AUTH; ?></span>
                 </div>
                 <div class="info-box">
                     <label>Main Database</label>
-                    <value><?php echo DB_MAIN; ?></value>
+                    <span class="value"><?php echo DB_MAIN; ?></span>
                 </div>
                 <div class="info-box">
                     <label>Scan Time</label>
-                    <value><?php echo $diagnostics['timestamp']; ?></value>
+                    <span class="value"><?php echo $diagnostics['timestamp']; ?></span>
                 </div>
             </div>
 
@@ -641,12 +814,18 @@ $diagnostics['overall_status'] = $all_critical_passed ? 'HEALTHY ✅' : 'HAS ISS
 
                     <?php if (isset($check['users']) && count($check['users']) > 0): ?>
                         <div class="details">
-                            <strong>Admin Users:</strong>
+                            <strong>👥 Admin Users & Credentials:</strong>
                             <div class="user-list">
                                 <?php foreach ($check['users'] as $user): ?>
                                     <div class="user-item">
-                                        <span class="username">👤 <?php echo htmlspecialchars($user['username']); ?></span>
-                                        <span class="role">Role: <?php echo htmlspecialchars($user['role']); ?></span>
+                                        <span class="username">📧 Username: <?php echo htmlspecialchars($user['username']); ?></span>
+                                        <span class="role">🔑 Role: <?php echo htmlspecialchars($user['role']); ?></span>
+                                        <?php if (isset($user['password'])): ?>
+                                            <span class="password">
+                                                <span class="password-label">🔐 Password Hash:</span>
+                                                <?php echo htmlspecialchars($user['password']); ?>
+                                            </span>
+                                        <?php endif; ?>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
@@ -676,10 +855,10 @@ $diagnostics['overall_status'] = $all_critical_passed ? 'HEALTHY ✅' : 'HAS ISS
         </div>
 
         <div class="button-group">
-            <a href="index.php" class="btn btn-primary">
+            <a href="index.php" class="btn">
                 <i class="ri-home-line"></i> Go to Homepage
             </a>
-            <a href="dashboard.php" class="btn btn-secondary">
+            <a href="dashboard.php" class="btn">
                 <i class="ri-dashboard-line"></i> Go to Dashboard
             </a>
         </div>
