@@ -63,7 +63,7 @@ if ($result) {
             width: 100%;
             background: rgba(0, 15, 30, 0.96);
             backdrop-filter: blur(12px);
-            padding: 12px 30px;
+            padding: 10px 30px;
             z-index: 100;
             border-bottom: 1px solid rgba(0, 200, 255, 0.2);
             display: flex;
@@ -86,7 +86,7 @@ if ($result) {
 
         header h2 {
             color: #00e0ff;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 700;
             letter-spacing: 1px;
             text-shadow: 0 2px 10px rgba(0, 200, 255, 0.3);
@@ -169,13 +169,13 @@ if ($result) {
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 120px 30px 50px;
+            padding: 80px 30px 50px;
         }
 
         h1 {
             color: #00e0ff;
-            font-size: 2.5em;
-            margin-bottom: 40px;
+            font-size: 2em;
+            margin-bottom: 30px;
             text-align: center;
             text-shadow: 0 0 15px rgba(0, 200, 255, 0.3);
             animation: slideDown 0.8s ease-out;
@@ -197,7 +197,7 @@ if ($result) {
             background: rgba(255, 255, 255, 0.06);
             border: 2px solid rgba(0, 255, 255, 0.25);
             border-radius: 15px;
-            padding: 40px 30px;
+            padding: 30px 25px;
             backdrop-filter: blur(10px);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -243,9 +243,9 @@ if ($result) {
         }
 
         .dashboard-card i {
-            font-size: 3.5em;
+            font-size: 2.8em;
             color: #00e0ff;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             z-index: 1;
@@ -342,9 +342,9 @@ if ($result) {
             background: rgba(255, 255, 255, 0.04);
             border: 2px solid rgba(0, 200, 255, 0.2);
             border-radius: 15px;
-            padding: 50px 40px;
+            padding: 35px 30px;
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
             backdrop-filter: blur(10px);
             animation: fadeIn 1s ease-out;
             position: relative;
