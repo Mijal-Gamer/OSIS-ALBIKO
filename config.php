@@ -18,9 +18,9 @@ if ($is_localhost) {
 } else {
     // PRODUCTION (osis-astamayana.space)
     define('SITE_URL', 'https://osis-astamayana.space/');
-    define('DB_HOST', 'localhost'); // Update with your hosting DB host if different
-    define('DB_USER', 'osis_user'); // Update with your hosting database user
-    define('DB_PASS', 'your_secure_password'); // Update with your hosting password
+    define('DB_HOST', 'localhost');
+    define('DB_USER', 'wwoiodev_Admin');
+    define('DB_PASS', 'qwertyuiop89001');
     define('ENVIRONMENT', 'production');
     define('DEBUG_MODE', false);
     
