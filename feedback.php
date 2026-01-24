@@ -530,6 +530,25 @@ require 'auth-check.php';
             animation: pulse 2s ease-in-out infinite;
         }
 
+        @media (max-width: 1024px) {
+            .container {
+                padding: 80px 20px 50px;
+            }
+
+            h1 {
+                font-size: 2em;
+                margin-bottom: 30px;
+            }
+
+            .feedback-grid {
+                gap: 20px;
+            }
+
+            .feedback-card {
+                padding: 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 70px 15px 50px;
@@ -538,6 +557,7 @@ require 'auth-check.php';
             header {
                 flex-wrap: wrap;
                 gap: 10px;
+                padding: 10px 15px;
             }
 
             .nav-links {
@@ -548,14 +568,23 @@ require 'auth-check.php';
 
             h1 {
                 font-size: 1.5em;
+                margin-bottom: 20px;
             }
 
             .search-box {
                 flex-direction: column;
+                gap: 10px;
             }
 
             .search-box input {
                 width: 100%;
+                padding: 10px 12px;
+                font-size: 14px;
+            }
+
+            .feedback-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
             }
 
             .feedback-card {
@@ -569,6 +598,109 @@ require 'auth-check.php';
 
             .stat-card {
                 min-width: 100%;
+                padding: 15px;
+            }
+
+            header h2 {
+                font-size: 1.1rem;
+            }
+
+            .pagination-buttons button {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 13px;
+            }
+
+            .container {
+                padding: 65px 10px 40px;
+            }
+
+            header {
+                padding: 8px 10px;
+            }
+
+            h1 {
+                font-size: 1.2em;
+                margin-bottom: 15px;
+            }
+
+            .search-box {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .search-box input {
+                width: 100%;
+                padding: 8px 10px;
+                font-size: 13px;
+                border-radius: 6px;
+            }
+
+            .feedback-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .feedback-card {
+                padding: 12px;
+                border-radius: 10px;
+            }
+
+            .feedback-card h3 {
+                font-size: 14px;
+            }
+
+            .feedback-card p {
+                font-size: 12px;
+                line-height: 1.4;
+            }
+
+            .feedback-card .meta {
+                font-size: 11px;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .stat-card {
+                min-width: 100%;
+                padding: 12px;
+                border-radius: 10px;
+            }
+
+            .stat-card h3 {
+                font-size: 13px;
+            }
+
+            .stat-card p {
+                font-size: 11px;
+            }
+
+            .pagination-buttons {
+                gap: 5px;
+                margin-top: 15px;
+            }
+
+            .pagination-buttons button {
+                padding: 8px 10px;
+                font-size: 12px;
+                border-radius: 6px;
+            }
+
+            header h2 {
+                font-size: 0.9rem;
+            }
+
+            .nav-links a {
+                padding: 6px 10px;
+                font-size: 12px;
             }
         }
     </style>

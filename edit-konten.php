@@ -808,16 +808,35 @@ $row = mysqli_fetch_assoc($result);
             transform: translateY(-1px) scale(0.98);
         }
 
+        @media (max-width: 1024px) {
+            .main {
+                margin: 80px 20px 30px;
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .form-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             .main {
-                margin: 80px 15px 30px;
+                margin: 75px 15px 30px;
                 padding: 20px;
             }
 
             header {
                 flex-wrap: wrap;
                 gap: 10px;
-                padding: 12px 15px;
+                padding: 10px 15px;
             }
 
             .nav-links {
@@ -845,8 +864,9 @@ $row = mysqli_fetch_assoc($result);
             }
 
             button {
-                padding: 14px 20px;
+                padding: 12px 18px;
                 font-size: 15px;
+                width: 100%;
             }
 
             header h2 {
@@ -854,7 +874,78 @@ $row = mysqli_fetch_assoc($result);
             }
 
             .ql-editor {
-                min-height: 200px !important;
+                min-height: 180px !important;
+            }
+
+            input[type="text"],
+            textarea,
+            select {
+                font-size: 16px;
+                padding: 10px 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+
+            .main {
+                margin: 70px 10px 30px;
+                padding: 15px;
+            }
+
+            header {
+                padding: 8px 10px;
+            }
+
+            h1 {
+                font-size: 1.2em;
+                margin-bottom: 15px;
+            }
+
+            .form-section {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+
+            .section-title {
+                font-size: 15px;
+                margin-bottom: 12px;
+            }
+
+            .button-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            button {
+                padding: 10px 12px;
+                font-size: 13px;
+                width: 100%;
+                border-radius: 6px;
+            }
+
+            input[type="text"],
+            textarea,
+            select {
+                font-size: 16px;
+                padding: 8px 10px;
+                border-radius: 6px;
+            }
+
+            .ql-editor {
+                min-height: 150px !important;
+                font-size: 14px;
+            }
+
+            header h2 {
+                font-size: 0.9rem;
+            }
+
+            .nav-links a {
+                padding: 6px 10px;
+                font-size: 12px;
             }
         }
 

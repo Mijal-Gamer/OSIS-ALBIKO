@@ -499,17 +499,82 @@ body {
     color: rgba(0, 224, 255, 0.7);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .login-box {
-        padding: 35px;
+        padding: 40px 30px;
+        max-width: 90%;
     }
 
     .login-box h2 {
-        font-size: 1.5em;
+        font-size: 1.8em;
+        margin-bottom: 15px;
+    }
+
+    .login-box p {
+        font-size: 0.95em;
+    }
+
+    .form-group label {
+        font-size: 0.9em;
     }
 
     .login-box input {
         padding: 12px 12px 12px 40px;
+        font-size: 1em;
+    }
+
+    .login-box button {
+        padding: 12px 20px;
+        font-size: 0.95em;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 20px 10px;
+    }
+
+    .login-box {
+        padding: 30px 20px;
+        max-width: 100%;
+    }
+
+    .login-box h2 {
+        font-size: 1.3em;
+        margin-bottom: 12px;
+    }
+
+    .login-box p {
+        font-size: 0.9em;
+        line-height: 1.5;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        font-size: 0.85em;
+    }
+
+    .login-box input {
+        padding: 10px 10px 10px 35px;
+        font-size: 14px;
+        border-radius: 6px;
+    }
+
+    .login-box button {
+        padding: 10px 15px;
+        font-size: 0.9em;
+        margin-top: 15px;
+    }
+
+    .login-footer {
+        font-size: 0.85em;
+    }
+
+    .login-footer a {
+        padding: 5px 10px;
     }
 }
 

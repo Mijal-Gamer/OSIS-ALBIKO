@@ -485,46 +485,38 @@ if ($result) {
             100% { transform: translateY(-100vh) translateX(100px) scale(0); opacity: 0; }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .container {
-                padding: 100px 15px 50px;
+                padding: 80px 25px 50px;
             }
 
             h1 {
-                font-size: 1.8em;
+                font-size: 2.2em;
+                margin-bottom: 30px;
+            }
+
+            .dashboard-grid {
+                gap: 25px;
+            }
+
+            .dashboard-card {
+                padding: 35px 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 75px 15px 50px;
+            }
+
+            h1 {
+                font-size: 1.6em;
+                margin-bottom: 25px;
             }
 
             .dashboard-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .welcome-section {
-                padding: 30px 20px;
-            }
-
-            .welcome-section h2 {
-                font-size: 1.5em;
-            }
-
-            header {
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-
-            .nav-links {
-                gap: 10px;
-            }
-
-            .nav-links a {
-                padding: 6px 10px;
-                font-size: 0.9em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .nav-links {
-                flex-direction: column;
+                gap: 18px;
             }
 
             .dashboard-card {
@@ -532,7 +524,189 @@ if ($result) {
             }
 
             .dashboard-card i {
+                font-size: 2.4em;
+                margin-bottom: 10px;
+            }
+
+            .dashboard-card h3 {
+                font-size: 1.2em;
+            }
+
+            .dashboard-card p {
+                font-size: 0.9em;
+            }
+
+            .welcome-section {
+                padding: 30px 20px;
+                margin-bottom: 30px;
+            }
+
+            .welcome-section h2 {
+                font-size: 1.4em;
+                margin-bottom: 15px;
+            }
+
+            .welcome-section p {
+                font-size: 0.95em;
+            }
+
+            .stats-section {
+                gap: 15px;
+            }
+
+            .stat-box {
+                padding: 15px;
+            }
+
+            .stat-box h3 {
+                font-size: 1.8em;
+            }
+
+            header {
+                flex-wrap: wrap;
+                gap: 10px;
+                padding: 8px 15px;
+            }
+
+            header h2 {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                gap: 8px;
+                width: 100%;
+                flex-wrap: wrap;
+            }
+
+            .nav-links a {
+                padding: 6px 10px;
+                font-size: 0.85em;
+            }
+
+            .logout-btn {
+                margin-left: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 13px;
+            }
+
+            .container {
+                padding: 70px 10px 40px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+                margin-bottom: 15px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .dashboard-card {
+                padding: 20px 15px;
+                border-radius: 12px;
+            }
+
+            .dashboard-card i {
                 font-size: 2em;
+                margin-bottom: 8px;
+            }
+
+            .dashboard-card h3 {
+                font-size: 1em;
+                margin-bottom: 8px;
+            }
+
+            .dashboard-card p {
+                font-size: 0.85em;
+                line-height: 1.4;
+                margin-bottom: 8px;
+            }
+
+            .dashboard-card a {
+                padding: 8px 15px;
+                font-size: 0.85em;
+                margin-top: 10px;
+            }
+
+            .welcome-section {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+                border-radius: 12px;
+            }
+
+            .welcome-section h2 {
+                font-size: 1.1em;
+                margin-bottom: 10px;
+            }
+
+            .welcome-section p {
+                font-size: 0.85em;
+                line-height: 1.5;
+            }
+
+            .stats-section {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                margin-top: 15px;
+            }
+
+            .stat-box {
+                padding: 12px;
+                border-radius: 10px;
+            }
+
+            .stat-box h3 {
+                font-size: 1.5em;
+            }
+
+            .stat-box p {
+                font-size: 0.8em;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 8px;
+                padding: 8px 10px;
+            }
+
+            .header-left {
+                width: 100%;
+            }
+
+            header h2 {
+                font-size: 0.9rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 5px;
+                width: 100%;
+            }
+
+            .nav-links a {
+                padding: 6px 8px;
+                font-size: 0.8em;
+                border-radius: 6px;
+            }
+
+            .logout-btn {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+
+            footer {
+                padding: 25px 15px;
+                font-size: 0.85em;
+            }
+
+            footer p {
+                margin: 4px 0;
             }
         }
     </style>
