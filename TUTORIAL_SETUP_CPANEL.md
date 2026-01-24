@@ -132,25 +132,26 @@ Kedua database sudah siap digunakan untuk project OSIS Astamayana!
 
 ## Step 4: Create Database User
 
-### 4.1 Minta Database Credentials ke Hosting
+### 4.1 Database Credentials (Sudah Ada) ✅
 
 ⚠️ **Hosting sudah membuat database user!**
 
-Hubungi hosting support atau cek email untuk mendapatkan:
+**Database Credentials dari Hosting:**
 ```
-Database Username: ?
-Database Password: ?
-Database Host: localhost (biasanya)
+Database Username: wwoiodev_Admin
+Database Password: qwertyuiop89001
+Database Host: localhost
 ```
 
 ### 4.2 Catat Credentials
 
-Setelah dapat dari hosting, catat:
+Informasi yang sudah diperoleh:
 ```
-Username: [Database username dari hosting]
-Password: [Database password dari hosting]
+Username: wwoiodev_Admin
+Password: qwertyuiop89001
 Database 1: wwoiodev_osis_auth
 Database 2: wwoiodev_osis
+Host: localhost
 ```
 
 ⚠️ Simpan baik-baik, dibutuhkan di Step 5!
@@ -182,15 +183,11 @@ define('DB_PASS', 'your_secure_password');
 ```php
 // PRODUCTION (osis-astamayana.space)
 define('DB_HOST', 'localhost');
-define('DB_USER', '[Username dari hosting]');  // Ganti dengan username dari Step 4
-define('DB_PASS', '[Password dari hosting]');  // Ganti dengan password dari Step 4
+define('DB_USER', 'wwoiodev_Admin');       // Username dari hosting
+define('DB_PASS', 'qwertyuiop89001');      // Password dari hosting
 ```
 
-**Contoh (sesuai dengan database Anda):**
-```php
-define('DB_USER', 'wwoiodev_user');        // Username database dari hosting
-define('DB_PASS', 'password123');          // Password database dari hosting
-```
+Selesai! Database sudah di-configure.
 
 ### 5.3 Save File
 
@@ -380,9 +377,9 @@ Pastikan muncul:
 Database Setup:
 ☐ Database wwoiodev_osis_auth sudah ada ✅
 ☐ Database wwoiodev_osis sudah ada ✅
-☐ Minta database username & password ke hosting
-☐ Verify user assigned ke kedua database
-☐ Update config.php dengan database credentials
+☐ Database username: wwoiodev_Admin ✅
+☐ Database password: qwertyuiop89001 ✅
+☐ Update config.php dengan database credentials ← LANGKAH PENTING!
 
 Database Tables:
 ☐ Create table users
@@ -461,7 +458,11 @@ Jika ada error atau pertanyaan:
 
 **Hosting Admin Email:**
 ```
-Minta bantuan ke: [hosting-support-email]
+Semua informasi database sudah lengkap:
+✅ Database 1: wwoiodev_osis
+✅ Database 2: wwoiodev_osis_auth
+✅ Database Username: wwoiodev_Admin
+✅ Database Password: qwertyuiop89001
 ```
 
 ---
