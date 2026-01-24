@@ -1,10 +1,37 @@
 <?php
 // Configuration File - Centralized Settings
+// Auto-detect environment (localhost vs production)
+
+$is_localhost = ($_SERVER['HTTP_HOST'] === 'localhost' || 
+                 $_SERVER['HTTP_HOST'] === 'localhost:80' || 
+                 $_SERVER['HTTP_HOST'] === 'localhost:8080' ||
+                 strpos($_SERVER['HTTP_HOST'], '127.0.0.1') === 0);
+
+if ($is_localhost) {
+    // LOCAL DEVELOPMENT
+    define('SITE_URL', 'http://localhost/OSIS-ALBIKO/');
+    define('DB_HOST', 'localhost');
+    define('DB_USER', 'root');
+    define('DB_PASS', '');
+    define('ENVIRONMENT', 'development');
+    define('DEBUG_MODE', true);
+} else {
+    // PRODUCTION (osis-astamayana.space)
+    define('SITE_URL', 'https://osis-astamayana.space/');
+    define('DB_HOST', 'localhost'); // Update with your hosting DB host if different
+    define('DB_USER', 'osis_user'); // Update with your hosting database user
+    define('DB_PASS', 'your_secure_password'); // Update with your hosting password
+    define('ENVIRONMENT', 'production');
+    define('DEBUG_MODE', false);
+    
+    // Production error handling
+    ini_set('display_errors', 0);
+    ini_set('log_errors', 1);
+    error_reporting(E_ALL);
+}
+
+// Common configuration for all environments
 define('SITE_NAME', 'OSIS Astamayana');
-define('SITE_URL', 'http://localhost/OSIS-ALBIKO/');
-define('DB_HOST', 'localhost');
-define('DB_USER', 'root');
-define('DB_PASS', '');
 define('DB_MAIN', 'osis');
 define('DB_AUTH', 'osis_auth');
 
@@ -26,8 +53,6 @@ define('SMTP_PORT', 587);
 define('SMTP_USER', 'your-email@gmail.com');
 define('SMTP_PASS', 'your-app-password');
 
-// Debug mode
-define('DEBUG_MODE', true);
 define('LOG_FILE', __DIR__ . '/logs/app.log');
 
 // Create necessary directories

@@ -1,0 +1,61 @@
+# OSIS Astamayana - Git Ignore
+# Protect sensitive files from being committed
+
+# Environment & Configuration
+.env
+.env.local
+.env.*.local
+config-local.php
+config-production.php
+
+# Database
+*.sql
+database-backup*.sql
+backup-database.sql
+
+# Uploads & Cache
+uploads/*
+!uploads/.gitkeep
+cache/*
+!cache/.gitkeep
+temp/*
+!temp/.gitkeep
+
+# IDE & Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+error_log
+access_log
+
+# OS Files
+.DS_Store
+.env.*.local
+Thumbs.db
+
+# PHP
+*.php~
+*.php.bak
+
+# Node (if used)
+node_modules/
+npm-debug.log
+
+# Package managers
+composer.lock
+package-lock.json
+
+# Sensitive files
+secrets.txt
+credentials.json
+.htaccess-backup
+
+# System files
+.htaccess
+robots.txt.bak
