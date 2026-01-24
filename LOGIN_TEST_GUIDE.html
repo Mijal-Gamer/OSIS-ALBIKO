@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login System Test Guide</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: linear-gradient(135deg, #08122a, #0d1b2a);
+            color: white;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 { color: #00e0ff; margin-bottom: 10px; text-align: center; }
+        .subtitle { text-align: center; color: #9be8ff; margin-bottom: 40px; }
+        
+        .step-box {
+            background: rgba(0, 50, 100, 0.3);
+            border: 2px solid rgba(0, 200, 255, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        .step-box:hover {
+            border-color: rgba(0, 200, 255, 0.6);
+            box-shadow: 0 0 20px rgba(0, 200, 255, 0.2);
+        }
+        
+        .step-title { 
+            color: #00e0ff; 
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .step-content {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+        
+        code {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #00ffff;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #00e0ff, #0077ff);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-family: inherit;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 200, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #ff6b6b, #ff4757);
+        }
+        
+        .credentials-box {
+            background: rgba(0, 100, 150, 0.2);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .credentials-box h3 {
+            color: #00ffff;
+            margin-bottom: 15px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 200, 255, 0.2);
+            color: #ccc;
+        }
+        
+        th {
+            background: rgba(0, 200, 255, 0.1);
+            color: #00e0ff;
+            font-weight: 600;
+        }
+        
+        .success { color: #4caf50; }
+        .error { color: #ff6b6b; }
+        .warning { color: #ffc107; }
+        
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-good { background: #4caf50; }
+        .status-warn { background: #ffc107; }
+        .status-bad { background: #ff6b6b; }
+        
+        .checklist {
+            list-style: none;
+            margin: 15px 0;
+        }
+        
+        .checklist li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: #00e0ff;
+            font-size: 1.2em;
+        }
+        
+        .info-box {
+            background: rgba(0, 150, 200, 0.1);
+            border-left: 4px solid #00e0ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        
+        .info-box strong {
+            color: #00e0ff;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 200, 255, 0.2);
+            color: #9be8ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 Login System Test Guide</h1>
+        <p class="subtitle">Complete testing workflow for the new login system</p>
+
+        <!-- Step 1 -->
+        <div class="step-box">
+            <div class="step-title">✅ Step 1: Setup Database</div>
+            <div class="step-content">
+                Jalankan script setup database untuk membuat database <code>osis_auth</code> dan insert test users.
+            </div>
+            <div class="button-group">
+                <a href="setup-database.php" class="btn" target="_blank">
+                    🚀 Run Database Setup
+                </a>
+            </div>
+            <div class="info-box">
+                <strong>Info:</strong> File ini akan otomatis create database, table, dan insert 3 test users. Jika sudah ada, akan di-clear dan di-insert ulang.
+            </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-box">
+            <div class="step-title">✅ Step 2: Test Login</div>
+            <div class="step-content">
+                Buka login page dan coba login dengan credentials di bawah ini.
+            </div>
+            
+            <div class="credentials-box">
+                <h3>🔑 Test Credentials</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Password</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>admin</code></td>
+                            <td><code>admin123</code></td>
+                            <td>admin</td>
+                            <td><span class="success">✅ Available</span></td>
+                        </tr>
+                        <tr>
+                            <td><code>user1</code></td>
+                            <td><code>password123</code></td>
+                            <td>user</td>
+                            <td><span class="success">✅ Available</span></td>
+                        </tr>
+                        <tr>
+                            <td><code>user2</code></td>
+                            <td><code>password456</code></td>
+                            <td>user</td>
+                            <td><span class="success">✅ Available</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="button-group">
+                <a href="login.php" class="btn" target="_blank">
+                    🔑 Go to Login Page
+                </a>
+            </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-box">
+            <div class="step-title">✅ Step 3: Expected Behavior</div>
+            <div class="step-content">
+                Setelah login berhasil, harusnya:
+            </div>
+            <ul class="checklist">
+                <li>Redirect otomatis ke <code>dashboard.php</code></li>
+                <li>Session variables set dengan benar</li>
+                <li>Navbar menampilkan username yang login</li>
+                <li>Bisa akses admin pages (edit-konten, feedback)</li>
+                <li>Logout button berfungsi dengan baik</li>
+            </ul>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-box">
+            <div class="step-title">✅ Step 4: Error Testing</div>
+            <div class="step-content">
+                Test berbagai skenario error untuk memastikan sistem robust.
+            </div>
+            <ul class="checklist">
+                <li>Login dengan username yang tidak ada</li>
+                <li>Login dengan password salah</li>
+                <li>Submit form kosong</li>
+                <li>Akses admin page tanpa login (harusnya redirect ke login)</li>
+                <li>Refresh page setelah login (session harusnya persist)</li>
+            </ul>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step-box">
+            <div class="step-title">✅ Step 5: UI/UX Testing</div>
+            <div class="step-content">
+                Verifikasi bahwa design dan animations berfungsi dengan baik.
+            </div>
+            <ul class="checklist">
+                <li>Gradient background smooth dan tidak berflicker</li>
+                <li>Input fields focus effect working</li>
+                <li>Button hover animation smooth</li>
+                <li>Error messages muncul dengan animasi</li>
+                <li>Responsive design pada mobile (< 480px)</li>
+                <li>Responsive design pada tablet (480px - 768px)</li>
+                <li>Responsive design pada desktop (> 768px)</li>
+            </ul>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="step-box">
+            <div class="step-title">✅ Step 6: Session Testing</div>
+            <div class="step-content">
+                Verifikasi session variables sudah set dengan benar.
+            </div>
+            <div class="button-group">
+                <a href="test-session.php" class="btn" target="_blank">
+                    📊 View Session Variables
+                </a>
+            </div>
+            <div class="info-box">
+                <strong>Info:</strong> Login dulu sebelum akses test-session.php untuk melihat session variables.
+            </div>
+        </div>
+
+        <!-- Documentation -->
+        <div class="step-box">
+            <div class="step-title">📚 Documentation</div>
+            <div class="step-content">
+                Baca dokumentasi lengkap untuk memahami implementasi login system.
+            </div>
+            <div class="button-group">
+                <a href="LOGIN_REDESIGN_SUMMARY.md" class="btn" target="_blank">
+                    📝 Quick Summary
+                </a>
+                <a href="LOGIN_DOCUMENTATION.md" class="btn" target="_blank">
+                    📖 Full Documentation
+                </a>
+            </div>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="step-box">
+            <div class="step-title">🔧 Troubleshooting</div>
+            
+            <div style="margin-bottom: 20px;">
+                <h4 style="color: #ff6b6b; margin-bottom: 10px;">❌ Database Connection Failed</h4>
+                <div class="step-content">
+                    <ul style="margin-left: 20px;">
+                        <li>Pastikan MySQL running: <code>services.msc</code> atau <code>start mysql</code></li>
+                        <li>Check credentials di <code>connect-auth.php</code></li>
+                        <li>Verify database <code>osis_auth</code> ada</li>
+                        <li>Try run: <code>setup-database.php</code> lagi</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h4 style="color: #ff6b6b; margin-bottom: 10px;">❌ Table Users Not Found</h4>
+                <div class="step-content">
+                    <ul style="margin-left: 20px;">
+                        <li>Run <code>setup-database.php</code> di browser</li>
+                        <li>Atau manual create table dengan SQL di documentation</li>
+                        <li>Check phpMyAdmin: <code>http://localhost/phpmyadmin</code></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h4 style="color: #ff6b6b; margin-bottom: 10px;">❌ Password Always Wrong</h4>
+                <div class="step-content">
+                    <ul style="margin-left: 20px;">
+                        <li>Verify password di database (exact match)</li>
+                        <li>Check di phpMyAdmin: <code>SELECT * FROM users</code></li>
+                        <li>Try plain text password dulu sebelum implement hashing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <h4 style="color: #ff6b6b; margin-bottom: 10px;">❌ Login Form Not Showing</h4>
+                <div class="step-content">
+                    <ul style="margin-left: 20px;">
+                        <li>Clear browser cache: <code>Ctrl + Shift + Delete</code></li>
+                        <li>Check PHP syntax: <code>php -l login.php</code></li>
+                        <li>Check Apache error log: <code>tail -f /var/log/apache2/error.log</code></li>
+                        <li>Try open in incognito window</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Commands -->
+        <div class="step-box">
+            <div class="step-title">⚡ Quick Commands</div>
+            <div class="step-content" style="margin-bottom: 15px;">
+                Gunakan commands ini untuk testing cepat:
+            </div>
+            <div style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 5px; font-family: 'Courier New';">
+                <p style="margin-bottom: 10px;"><strong># Check PHP syntax</strong></p>
+                <code>php -l login.php</code>
+                
+                <p style="margin-top: 15px; margin-bottom: 10px;"><strong># View database</strong></p>
+                <code>mysql -u root -p osis_auth -e "SELECT * FROM users;"</code>
+                
+                <p style="margin-top: 15px; margin-bottom: 10px;"><strong># Clear PHP sessions</strong></p>
+                <code>rm /var/lib/php/sessions/sess_*</code>
+                
+                <p style="margin-top: 15px; margin-bottom: 10px;"><strong># Restart Apache</strong></p>
+                <code>sudo systemctl restart apache2</code>
+                
+                <p style="margin-top: 15px; margin-bottom: 10px;"><strong># Tail Apache error log</strong></p>
+                <code>tail -f /var/log/apache2/error.log</code>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="step-box" style="background: rgba(76, 175, 80, 0.1); border-color: rgba(76, 175, 80, 0.4);">
+            <div class="step-title" style="color: #4caf50;">✅ Testing Summary</div>
+            <div class="step-content">
+                <strong>Login system sudah complete dan ready untuk testing:</strong>
+            </div>
+            <ul class="checklist">
+                <li>Modern & elegant design ✅</li>
+                <li>Database integration with osis_auth ✅</li>
+                <li>Prepared statements untuk security ✅</li>
+                <li>Session-based authentication ✅</li>
+                <li>Auto-setup database script ✅</li>
+                <li>Complete documentation ✅</li>
+                <li>Error handling ✅</li>
+                <li>Responsive design ✅</li>
+            </ul>
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p><strong>Next Step:</strong> Klik button di bawah untuk mulai testing!</p>
+                <div class="button-group" style="margin-top: 15px;">
+                    <a href="setup-database.php" class="btn">🚀 Setup Database</a>
+                    <a href="login.php" class="btn">🔑 Go to Login</a>
+                    <a href="dashboard.php" class="btn btn-secondary">📊 View Dashboard</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Login System Redesign</strong> - January 2026</p>
+            <p>Clean • Elegant • Secure • Responsive</p>
+            <p style="margin-top: 10px; color: #7f8c8d;">Built with ❤️ for OSIS Astamayana</p>
+        </div>
+    </div>
+</body>
+</html>
