@@ -836,27 +836,35 @@ $row = mysqli_fetch_assoc($result);
 
             header {
                 flex-wrap: wrap;
-                gap: 10px;
-                padding: 10px 15px;
+                gap: 8px;
+                padding: 10px 12px;
+                justify-content: center;
+                align-items: stretch;
             }
 
             .header-left {
-                width: 100%;
+                display: flex;
+                align-items: center;
             }
 
             .logo-container {
-                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 10px;
             }
 
             .logo-container img {
-                width: 35px;
-                height: 35px;
+                width: 32px;
+                height: 32px;
             }
 
             .nav-links {
-                flex-direction: column;
-                gap: 5px;
-                width: 100%;
+                display: flex;
+                flex-direction: row;
+                gap: 4px;
+                align-items: center;
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
             h1 {
@@ -923,26 +931,45 @@ $row = mysqli_fetch_assoc($result);
             }
 
             .main {
-                margin: 65px 10px 30px;
+                margin: 70px 10px 30px;
                 padding: 12px;
             }
 
             header {
                 padding: 8px 10px;
-                min-height: 50px;
+                min-height: auto;
+                gap: 6px;
             }
 
             .header-left {
-                width: 100%;
+                display: flex;
+                align-items: center;
             }
 
             .logo-container {
-                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 8px;
             }
 
             .logo-container img {
                 width: 30px;
                 height: 30px;
+            }
+
+            .nav-links {
+                display: flex;
+                flex-direction: row;
+                gap: 4px;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+
+            .nav-links a {
+                padding: 6px 10px;
+                font-size: 12px;
+                gap: 3px;
+                white-space: nowrap;
             }
 
             h1 {
@@ -1016,6 +1043,34 @@ $row = mysqli_fetch_assoc($result);
 
         /* Extra small screens */
         @media (max-width: 360px) {
+            header {
+                padding: 6px 8px;
+                gap: 5px;
+            }
+
+            .logo-container {
+                gap: 6px;
+            }
+
+            .logo-container img {
+                width: 28px;
+                height: 28px;
+            }
+
+            header h2 {
+                font-size: 0.85rem;
+            }
+
+            .nav-links {
+                gap: 3px;
+            }
+
+            .nav-links a {
+                padding: 4px 8px;
+                font-size: 11px;
+                gap: 2px;
+            }
+
             .form-section {
                 padding: 10px 12px;
                 margin-bottom: 12px;
@@ -1773,14 +1828,14 @@ $row = mysqli_fetch_assoc($result);
                 if (filtered.length > 0) {
                     filtered.forEach(item => {
                         const itemDiv = document.createElement('div');
-                        itemDiv.style.cssText = 'background:rgba(0,100,200,0.3); padding:12px; margin-bottom:10px; border-radius:8px; display:flex; gap:10px; align-items:flex-start;';
+                        itemDiv.style.cssText = 'background:rgba(0,100,200,0.3); padding:12px; margin-bottom:10px; border-radius:8px; display:grid; grid-template-columns:1fr auto auto; gap:10px; align-items:center; word-break:break-word;';
                         itemDiv.innerHTML = `
-                            <div style="flex:1;">
-                                <input type="text" class="nama-${item.id}" value="${item.nama}" placeholder="Nama" style="width:100%; padding:8px; background:rgba(255,255,255,0.1); border:1px solid rgba(0,200,255,0.3); border-radius:5px; color:white; margin-bottom:5px;">
-                                <input type="text" class="posisi-${item.id}" value="${item.posisi}" placeholder="Posisi" style="width:100%; padding:8px; background:rgba(255,255,255,0.1); border:1px solid rgba(0,200,255,0.3); border-radius:5px; color:white;">
+                            <div style="display:flex; flex-direction:column; gap:6px; min-width:0;">
+                                <input type="text" class="nama-${item.id}" value="${item.nama}" placeholder="Nama" style="width:100%; padding:8px; background:rgba(255,255,255,0.1); border:1px solid rgba(0,200,255,0.3); border-radius:5px; color:white; margin:0; word-break:break-word;">
+                                <input type="text" class="posisi-${item.id}" value="${item.posisi}" placeholder="Posisi" style="width:100%; padding:8px; background:rgba(255,255,255,0.1); border:1px solid rgba(0,200,255,0.3); border-radius:5px; color:white; margin:0; word-break:break-word;">
                             </div>
-                            <button type="button" style="padding:8px 12px; background:#00e0ff; border:none; border-radius:5px; color:black; cursor:pointer; font-weight:600;" onclick="updateStrutur(${item.id})">Simpan</button>
-                            <button type="button" style="padding:8px 12px; background:#ff6b6b; border:none; border-radius:5px; color:white; cursor:pointer;" onclick="deleteStrutur(${item.id})">Hapus</button>
+                            <button type="button" style="padding:8px 10px; background:#00e0ff; border:none; border-radius:5px; color:black; cursor:pointer; font-weight:600; white-space:nowrap; min-width:fit-content;" onclick="updateStrutur(${item.id})">Simpan</button>
+                            <button type="button" style="padding:8px 10px; background:#ff6b6b; border:none; border-radius:5px; color:white; cursor:pointer; white-space:nowrap; min-width:fit-content;" onclick="deleteStrutur(${item.id})">Hapus</button>
                         `;
                         anggotaList.appendChild(itemDiv);
                     });
