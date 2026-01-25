@@ -3,6 +3,7 @@
 <head>
     <title>Feedback Test</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body style="background: #08122a; color: white; padding: 20px; font-family: Poppins, sans-serif;">
     <h1>🧪 Feedback System Test</h1>

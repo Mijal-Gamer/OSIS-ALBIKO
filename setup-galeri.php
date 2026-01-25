@@ -30,6 +30,7 @@ mysqli_close($conn_auth);
 <head>
     <meta charset="UTF-8">
     <title>Setup Galeri</title>
+    <link rel="stylesheet" href="assets/css/style.css">
     <style>
         body {
             background: linear-gradient(135deg, #08122a, #020409, #0d1b2a);
