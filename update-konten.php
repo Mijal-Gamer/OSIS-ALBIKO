@@ -14,24 +14,26 @@ if (!$conn) {
 }
 
 $errors = [];
-if (empty($_POST['judul_tentang'])) $errors[] = 'Judul Tentang';
-if (empty($_POST['isi_tentang'])) $errors[] = 'Isi Tentang';
-if (empty($_POST['judul_kegiatan'])) $errors[] = 'Judul Kegiatan';
-if (empty($_POST['isi_kegiatan'])) $errors[] = 'Isi Kegiatan';
+// Hanya validasi field yang tidak boleh semua kosong
+// Cukup salah satu field Tentang atau Kegiatan yang terisi
+if (empty($_POST['judul_tentang']) && empty($_POST['isi_tentang']) && 
+    empty($_POST['judul_kegiatan']) && empty($_POST['isi_kegiatan'])) {
+    $errors[] = 'Minimal isi salah satu field sebelum menyimpan';
+}
 
 if (!empty($errors)) {
     echo json_encode([
         'status' => 'error', 
         'message' => '❌ Validasi data gagal!',
-        'detail' => 'Field kosong: ' . implode(', ', $errors)
+        'detail' => implode(', ', $errors)
     ]);
     exit();
 }
 
-$judul_tentang = trim(mysqli_real_escape_string($conn, $_POST['judul_tentang']));
-$isi_tentang = trim(mysqli_real_escape_string($conn, $_POST['isi_tentang']));
-$judul_kegiatan = trim(mysqli_real_escape_string($conn, $_POST['judul_kegiatan']));
-$isi_kegiatan = trim(mysqli_real_escape_string($conn, $_POST['isi_kegiatan']));
+$judul_tentang = trim(mysqli_real_escape_string($conn, $_POST['judul_tentang'] ?? ''));
+$isi_tentang = trim(mysqli_real_escape_string($conn, $_POST['isi_tentang'] ?? ''));
+$judul_kegiatan = trim(mysqli_real_escape_string($conn, $_POST['judul_kegiatan'] ?? ''));
+$isi_kegiatan = trim(mysqli_real_escape_string($conn, $_POST['isi_kegiatan'] ?? ''));
 $instagram = trim(mysqli_real_escape_string($conn, $_POST['instagram'] ?? ''));
 $tiktok = trim(mysqli_real_escape_string($conn, $_POST['tiktok'] ?? ''));
 

@@ -1584,20 +1584,13 @@ $row = mysqli_fetch_assoc($result);
             document.getElementById('isi_tentang').value = isiTentangValue;
             document.getElementById('isi_kegiatan').value = isiKegiatanValue;
 
-            if (!document.getElementById('judul_tentang').value.trim()) {
-                alert('❌ Judul Tentang tidak boleh kosong!');
-                return;
-            }
-            if (!isiTentangValue.trim()) {
-                alert('❌ Deskripsi Tentang tidak boleh kosong!');
-                return;
-            }
-            if (!document.getElementById('judul_kegiatan').value.trim()) {
-                alert('❌ Judul Kegiatan tidak boleh kosong!');
-                return;
-            }
-            if (!isiKegiatanValue.trim()) {
-                alert('❌ Deskripsi Kegiatan tidak boleh kosong!');
+            // Cek apakah ada field yang berisi data
+            const judulTentang = document.getElementById('judul_tentang').value.trim();
+            const judulKegiatan = document.getElementById('judul_kegiatan').value.trim();
+            
+            // Minimal ada satu field yang harus diisi
+            if (!judulTentang && !isiTentangValue.trim() && !judulKegiatan && !isiKegiatanValue.trim()) {
+                alert('❌ Minimal isi salah satu field sebelum menyimpan!');
                 return;
             }
 
