@@ -1390,7 +1390,7 @@ $row = mysqli_fetch_assoc($result);
 
                 <div class="gallery-upload">
                     <input type="file" id="fotoInput" accept="image/*" placeholder="Pilih foto">
-                    <input type="text" id="judulGaleri" placeholder="Judul foto" required>
+                    <input type="text" id="judulGaleri" placeholder="Judul foto">
                     <textarea id="deskripsiGaleri" placeholder="Deskripsi foto (opsional)"></textarea>
                     <button type="button" class="btn-upload-galeri" onclick="uploadGaleri()">
                         <i class="ri-upload-cloud-2-line"></i> Upload Foto
