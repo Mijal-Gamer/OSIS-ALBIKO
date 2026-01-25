@@ -748,6 +748,76 @@ $diagnostics['overall_status'] = $all_critical_passed ? 'HEALTHY ✅' : 'HAS ISS
         .btn i {
             font-size: 18px;
         }
+
+        /* Mobile responsive header */
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 12px;
+                flex-wrap: wrap;
+                min-height: 55px;
+            }
+
+            header h2 {
+                font-size: clamp(14px, 3.5vw, 16px);
+                min-width: 100px;
+            }
+
+            header h2 i {
+                font-size: 1.3em;
+            }
+
+            .header-actions {
+                gap: 8px;
+                flex-wrap: wrap;
+                width: 100%;
+                justify-content: flex-end;
+            }
+
+            .header-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+                gap: 4px;
+                white-space: nowrap;
+            }
+
+            .header-btn i {
+                font-size: 1.1em;
+            }
+
+            .header-section {
+                padding: 25px 15px;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 380px) {
+            header {
+                padding: 8px 10px;
+                min-height: 50px;
+            }
+
+            header h2 {
+                font-size: 12px;
+            }
+
+            header h2 i {
+                font-size: 1.1em;
+            }
+
+            .header-btn {
+                padding: 4px 8px;
+                font-size: 10px;
+                gap: 3px;
+            }
+
+            .header-btn span {
+                display: none;
+            }
+
+            .header-btn i {
+                font-size: 1em;
+            }
+        }
     </style>
 </head>
 <body>

@@ -64,14 +64,16 @@ if ($result) {
             width: 100%;
             background: rgba(0, 15, 30, 0.96);
             backdrop-filter: blur(12px);
-            padding: 10px 30px;
+            padding: 12px 15px;
             z-index: 100;
             border-bottom: 1px solid rgba(0, 200, 255, 0.2);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             animation: slideDown 0.8s ease-out;
+            min-height: 60px;
         }
 
         @keyframes slideDown {
@@ -85,13 +87,47 @@ if ($result) {
             gap: 15px;
         }
 
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logo-container img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(0, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .logo-container img:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
+            border-color: rgba(0, 255, 255, 0.9);
+        }
+
+        .logo-container:hover h2 {
+            color: #00ffff;
+            text-shadow: 0 2px 15px rgba(0, 255, 255, 0.6);
+            transform: translateY(-2px);
+        }
+
         header h2 {
             color: #00e0ff;
-            font-size: 1.1rem;
+            font-size: clamp(16px, 4vw, 1.1rem);
             font-weight: 700;
             letter-spacing: 1px;
             text-shadow: 0 2px 10px rgba(0, 200, 255, 0.3);
             transition: all 0.3s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
+            min-width: 100px;
         }
 
         header h2:hover {
@@ -100,9 +136,10 @@ if ($result) {
         }
 
         header i {
-            font-size: 2em;
+            font-size: 1.5em;
             color: #00e0ff;
             transition: all 0.3s ease;
+            min-width: 24px;
         }
 
         header i:hover {
@@ -112,7 +149,8 @@ if ($result) {
 
         .nav-links {
             display: flex;
-            gap: 15px;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
@@ -121,12 +159,14 @@ if ($result) {
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 15px;
-            border-radius: 8px;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 6px;
             font-weight: 600;
+            font-size: 14px;
             position: relative;
             overflow: hidden;
+            white-space: nowrap;
         }
 
         .nav-links a::before {
@@ -715,6 +755,98 @@ if ($result) {
             footer p {
                 margin: 4px 0;
             }
+
+            /* Mobile header optimization */
+            header {
+                padding: 10px 12px;
+                min-height: 55px;
+            }
+
+            header h2 {
+                font-size: clamp(14px, 3.5vw, 16px);
+                min-width: 80px;
+            }
+
+            .header-left {
+                gap: 10px;
+            }
+
+            header i {
+                font-size: 1.3em;
+                min-width: 20px;
+            }
+
+            .nav-links {
+                gap: 8px;
+            }
+
+            .nav-links a {
+                padding: 5px 10px;
+                font-size: 12px;
+                gap: 4px;
+            }
+
+            .logout-btn {
+                padding: 5px 10px !important;
+                font-size: 12px !important;
+            }
+
+            .container {
+                padding: 70px 15px 40px;
+            }
+
+            h1 {
+                font-size: 1.3em;
+                margin-bottom: 20px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .dashboard-card {
+                padding: 20px 15px;
+            }
+
+            .dashboard-card i {
+                font-size: 2em;
+                margin-bottom: 8px;
+            }
+
+            .dashboard-card h3 {
+                font-size: 1.2em;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 380px) {
+            header {
+                padding: 8px 10px;
+                min-height: 50px;
+            }
+
+            header h2 {
+                font-size: 12px;
+            }
+
+            .nav-links a {
+                padding: 4px 8px;
+                font-size: 11px;
+                gap: 3px;
+            }
+
+            .nav-links a i {
+                font-size: 1em;
+            }
+
+            .nav-links a span {
+                display: none;
+            }
+
+            .logout-btn span {
+                display: inline;
+            }
         }
     </style>
 </head>
@@ -724,8 +856,10 @@ if ($result) {
 
     <header>
         <div class="header-left">
-            <i class="ri-dashboard-line"></i>
-            <h2>Admin Panel</h2>
+            <div class="logo-container">
+                <img src="OSIS.ico" alt="Logo OSIS">
+                <h2><i class="ri-dashboard-line"></i> Admin Panel</h2>
+            </div>
         </div>
         <div class="nav-links">
             <a href="#"><i class="ri-home-line"></i> Dashboard</a>

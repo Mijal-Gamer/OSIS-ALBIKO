@@ -791,7 +791,7 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
 
     <header>
         <div class="logo-container">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAQDcLuO55zCJeSTV4kJHoTv1qHn8fQu8z7Q&s" alt="Logo OSIS">
+            <img src="OSIS.ico" alt="Logo OSIS">
             <h2>OSIS Astamayana</h2>
         </div>
         <label class="burger">
@@ -812,7 +812,7 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
     </div>
 
     <section id="tentang">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAQDcLuO55zCJeSTV4kJHoTv1qHn8fQu8z7Q&s" class="section-logo" alt="Logo OSIS" loading="lazy">
+        <img src="OSIS.ico" class="section-logo" alt="Logo OSIS" loading="lazy">
         <h1><?php echo $judul_tentang; ?></h1>
         <p><?php echo $isi_tentang; ?></p>
     </section>

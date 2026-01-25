@@ -840,6 +840,19 @@ $row = mysqli_fetch_assoc($result);
                 padding: 10px 15px;
             }
 
+            .header-left {
+                width: 100%;
+            }
+
+            .logo-container {
+                width: 100%;
+            }
+
+            .logo-container img {
+                width: 35px;
+                height: 35px;
+            }
+
             .nav-links {
                 flex-direction: column;
                 gap: 5px;
@@ -852,11 +865,29 @@ $row = mysqli_fetch_assoc($result);
             }
 
             .form-section {
-                padding: 20px;
+                padding: 18px;
+                margin-bottom: 20px;
+                border-radius: 12px;
             }
 
             .section-title {
                 font-size: 18px;
+                gap: 8px;
+                margin-bottom: 16px;
+                padding-bottom: 10px;
+            }
+
+            .section-title i {
+                font-size: 20px;
+            }
+
+            .form-group {
+                margin-bottom: 16px;
+            }
+
+            .form-group label {
+                font-size: 13px;
+                margin-bottom: 8px;
             }
 
             .button-group {
@@ -892,12 +923,26 @@ $row = mysqli_fetch_assoc($result);
             }
 
             .main {
-                margin: 70px 10px 30px;
-                padding: 15px;
+                margin: 65px 10px 30px;
+                padding: 12px;
             }
 
             header {
                 padding: 8px 10px;
+                min-height: 50px;
+            }
+
+            .header-left {
+                width: 100%;
+            }
+
+            .logo-container {
+                width: 100%;
+            }
+
+            .logo-container img {
+                width: 30px;
+                height: 30px;
             }
 
             h1 {
@@ -906,13 +951,32 @@ $row = mysqli_fetch_assoc($result);
             }
 
             .form-section {
-                padding: 15px;
+                padding: 12px 14px;
                 margin-bottom: 15px;
+                border-radius: 10px;
+                border: 1px solid rgba(0, 200, 255, 0.15);
             }
 
             .section-title {
-                font-size: 15px;
+                font-size: 14px;
+                gap: 8px;
                 margin-bottom: 12px;
+                padding-bottom: 8px;
+                border-bottom: 2px solid rgba(0, 200, 255, 0.2);
+            }
+
+            .section-title i {
+                font-size: 16px;
+                min-width: 16px;
+            }
+
+            .form-group {
+                margin-bottom: 12px;
+            }
+
+            .form-group label {
+                font-size: 12px;
+                margin-bottom: 6px;
             }
 
             .button-group {
@@ -947,6 +1011,38 @@ $row = mysqli_fetch_assoc($result);
             .nav-links a {
                 padding: 6px 10px;
                 font-size: 12px;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 360px) {
+            .form-section {
+                padding: 10px 12px;
+                margin-bottom: 12px;
+            }
+
+            .section-title {
+                font-size: 13px;
+                margin-bottom: 10px;
+            }
+
+            .section-title i {
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 1em;
+                margin-bottom: 12px;
+            }
+
+            .form-group label {
+                font-size: 11px;
+            }
+
+            input[type="text"],
+            textarea {
+                padding: 6px 8px;
+                font-size: 14px;
             }
         }
 
@@ -1141,7 +1237,7 @@ $row = mysqli_fetch_assoc($result);
     <header>
         <div class="header-left">
             <div class="logo-container">
-                <img src="https://raw.githubusercontent.com/Mijal-Gamer/OSIS-ALBIKO/refs/heads/main/favicon.ico" alt="Logo OSIS">
+                <img src="OSIS.ico" alt="Logo OSIS">
                 <h2><i class="ri-edit-line"></i> Edit Konten</h2>
             </div>
         </div>
