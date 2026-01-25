@@ -1,9 +1,6 @@
 <?php
-/**
- * OSIS Astamayana - Diagnostic Page
- * Check system health, database connectivity, and data status
- */
-
+require 'auth-check.php';
+require 'connect-auth.php';
 require 'config.php';
 
 $diagnostics = [
