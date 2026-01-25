@@ -671,13 +671,16 @@ if ($result) {
             }
 
             header {
-                flex-direction: column;
+                flex-direction: row;
                 gap: 8px;
                 padding: 8px 10px;
+                justify-content: space-between;
+                align-items: center;
             }
 
             .header-left {
-                width: 100%;
+                width: auto;
+                gap: 8px;
             }
 
             header h2 {
@@ -685,19 +688,22 @@ if ($result) {
             }
 
             .nav-links {
-                flex-direction: column;
+                flex-direction: row;
                 gap: 5px;
-                width: 100%;
+                width: auto;
+                flex-wrap: wrap;
+                justify-content: flex-end;
             }
 
             .nav-links a {
                 padding: 6px 8px;
                 font-size: 0.8em;
                 border-radius: 6px;
+                white-space: nowrap;
             }
 
             .logout-btn {
-                margin-left: 0;
+                margin-left: auto;
                 margin-top: 5px;
             }
 
