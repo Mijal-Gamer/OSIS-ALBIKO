@@ -28,6 +28,7 @@ mysqli_close($conn_auth);
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <meta charset="UTF-8">
     <title>Setup Galeri</title>
     <link rel="stylesheet" href="assets/css/style.css">

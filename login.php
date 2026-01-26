@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 * {
     margin: 0;
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 body {
-    background: linear-gradient(135deg, #0f1f3f 0%, #08122a 50%, #0d1b2a 100%);
+    background: linear-gradient(135deg, #0a1428 0%, #0d2847 25%, #071e3a 50%, #0a0e27 75%, #0d1b2a 100%);
     color: white;
     min-height: 100vh;
     overflow: hidden;
@@ -95,6 +95,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    backdrop-filter: blur(10px);
 }
 
 .bg-blur {
@@ -104,32 +105,34 @@ body {
     border-radius: 50%;
     pointer-events: none;
     z-index: 0;
-    filter: blur(80px);
-    opacity: 0.6;
+    filter: blur(100px);
+    opacity: 0.7;
 }
 
 .blur-1 {
-    background: radial-gradient(circle, rgba(0, 200, 255, 0.3), transparent);
+    background: radial-gradient(circle, rgba(0, 224, 255, 0.35), rgba(0, 150, 255, 0.1), transparent);
     top: -200px;
     left: -200px;
-    animation: float1 8s ease-in-out infinite;
+    animation: float1 12s ease-in-out infinite;
+    box-shadow: 0 0 100px rgba(0, 200, 255, 0.3);
 }
 
 .blur-2 {
-    background: radial-gradient(circle, rgba(0, 150, 255, 0.2), transparent);
+    background: radial-gradient(circle, rgba(0, 150, 255, 0.25), rgba(0, 100, 255, 0.1), transparent);
     bottom: -200px;
     right: -200px;
-    animation: float2 10s ease-in-out infinite;
+    animation: float2 15s ease-in-out infinite;
+    box-shadow: 0 0 100px rgba(0, 150, 255, 0.2);
 }
 
 @keyframes float1 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(50px, -50px); }
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(80px, -80px) scale(1.1); }
 }
 
 @keyframes float2 {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(-50px, 50px); }
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-80px, 80px) scale(1.1); }
 }
 
 .particles {
@@ -146,23 +149,26 @@ body {
     position: absolute;
     width: 2px;
     height: 2px;
-    background: rgba(0, 200, 255, 0.5);
+    background: rgba(0, 200, 255, 0.7);
     border-radius: 50%;
-    animation: float-up 8s ease-in infinite;
-    box-shadow: 0 0 6px rgba(0, 200, 255, 0.4);
+    animation: float-up 10s ease-in infinite;
+    box-shadow: 0 0 10px rgba(0, 200, 255, 0.6);
 }
 
 @keyframes float-up {
     0% {
         opacity: 0;
-        transform: translateY(100vh) translateX(0);
+        transform: translateY(100vh) translateX(0) scale(0.5);
     }
-    50% {
+    10% {
+        opacity: 1;
+    }
+    90% {
         opacity: 1;
     }
     100% {
         opacity: 0;
-        transform: translateY(-100vh) translateX(100px);
+        transform: translateY(-100vh) translateX(150px) scale(0);
     }
 }
 
@@ -175,29 +181,62 @@ body {
 }
 
 .login-box {
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(0, 200, 255, 0.2);
-    border-radius: 20px;
-    padding: 50px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-    animation: slideUp 0.8s ease-out;
+    background: rgba(13, 27, 42, 0.85);
+    border: 2px solid rgba(0, 224, 255, 0.35);
+    border-radius: 24px;
+    padding: 60px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5),
+                0 0 50px rgba(0, 200, 255, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    animation: slideUp 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 224, 255, 0.1), transparent 70%);
+    animation: rotate 20s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.login-box > * {
+    position: relative;
+    z-index: 1;
 }
 
 @keyframes slideUp {
     from {
         opacity: 0;
-        transform: translateY(50px);
+        transform: translateY(80px) scale(0.95);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
 .login-box h2 {
     color: #00e0ff;
-    font-size: 2em;
+    font-size: 2.2em;
+    margin-bottom: 8px;
+    text-align: center;
+    font-weight: 700;
+    text-shadow: 0 0 20px rgba(0, 200, 255, 0.3);
+    letter-spacing: -0.5px;
+}
     margin-bottom: 10px;
     text-align: center;
     font-weight: 700;
@@ -205,40 +244,45 @@ body {
 
 .login-box .subtitle {
     text-align: center;
-    color: #a0c4ff;
-    margin-bottom: 35px;
-    font-size: 0.95em;
-    animation: fadeIn 0.8s ease 0.3s both;
+    color: #7fd8ff;
+    margin-bottom: 40px;
+    font-size: 1em;
+    animation: fadeIn 1s ease 0.4s both;
+    letter-spacing: 0.3px;
+    font-weight: 500;
 }
 
 .form-group {
-    margin-bottom: 22px;
-    animation: slideInForm 0.6s ease forwards;
+    margin-bottom: 26px;
+    animation: slideInForm 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     opacity: 0;
 }
 
-.form-group:nth-child(1) { animation-delay: 0.4s; }
-.form-group:nth-child(2) { animation-delay: 0.5s; }
+.form-group:nth-child(1) { animation-delay: 0.5s; }
+.form-group:nth-child(2) { animation-delay: 0.65s; }
 
 @keyframes slideInForm {
     from {
         opacity: 0;
-        transform: translateX(-20px);
+        transform: translateX(-30px) translateY(10px);
     }
     to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateX(0) translateY(0);
     }
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 8px;
-    color: #a0c4ff;
+    margin-bottom: 10px;
+    color: #7fd8ff;
     font-weight: 600;
     font-size: 0.95em;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .input-wrapper {
@@ -246,6 +290,7 @@ body {
     display: flex;
     align-items: center;
     overflow: hidden;
+    border-radius: 14px;
 }
 
 .input-wrapper::before {
@@ -254,9 +299,9 @@ body {
     left: 0;
     bottom: 0;
     width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #00e0ff, #0077ff);
-    transition: width 0.3s ease;
+    height: 3px;
+    background: linear-gradient(90deg, #00e0ff, #00ffff, #0099ff);
+    transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     z-index: 2;
 }
 
@@ -266,58 +311,63 @@ body {
 
 .input-wrapper i {
     position: absolute;
-    left: 15px;
-    color: #00b8ff;
+    left: 16px;
+    color: #00a8d8;
     font-size: 20px;
     z-index: 1;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .input-wrapper:focus-within i {
-    color: #00e0ff;
-    transform: scale(1.2);
+    color: #00ffff;
+    transform: scale(1.3) rotate(8deg);
 }
 
 .login-box input {
     width: 100%;
-    padding: 14px 14px 14px 50px;
-    border: 2px solid rgba(0, 200, 255, 0.2);
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
+    padding: 16px 16px 16px 55px;
+    border: 2px solid rgba(0, 200, 255, 0.25);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
     color: #fff;
     font-size: 0.95em;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     outline: none;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
+    letter-spacing: 0.3px;
 }
 
 .login-box input::placeholder {
-    color: rgba(255, 255, 255, 0.4);
+    color: rgba(255, 255, 255, 0.35);
 }
 
 .login-box input:focus {
-    border-color: rgba(0, 200, 255, 0.6);
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 20px rgba(0, 200, 255, 0.3), inset 0 0 15px rgba(0, 200, 255, 0.05);
-    transform: translateY(-2px);
+    border-color: rgba(0, 224, 255, 0.7);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 30px rgba(0, 224, 255, 0.35),
+                inset 0 0 20px rgba(0, 224, 255, 0.08),
+                0 0 60px rgba(0, 150, 255, 0.2);
+    transform: translateY(-4px);
 }
 
 .login-box button {
     width: 100%;
-    padding: 14px;
-    margin-top: 30px;
+    padding: 16px;
+    margin-top: 35px;
     border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #00e0ff, #0077ff);
+    border-radius: 14px;
+    background: linear-gradient(135deg, #00e0ff 0%, #00b4ff 50%, #0077ff 100%);
     color: white;
-    font-weight: 600;
-    font-size: 1em;
+    font-weight: 700;
+    font-size: 1.05em;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 25px rgba(0, 200, 255, 0.2);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 12px 35px rgba(0, 200, 255, 0.3),
+                0 0 30px rgba(0, 150, 255, 0.2);
     position: relative;
     overflow: hidden;
-    animation: slideInForm 0.6s ease 0.6s both;
+    animation: slideInForm 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s both;
+    letter-spacing: 0.5px;
 }
 
 .login-box button::before {
@@ -328,77 +378,82 @@ body {
     width: 0;
     height: 0;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.4);
     transform: translate(-50%, -50%);
-    transition: width 0.6s ease, height 0.6s ease;
+    transition: width 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
+                height 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .login-box button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(0, 200, 255, 0.4);
-    background: linear-gradient(135deg, #00ffff, #0099ff);
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 18px 50px rgba(0, 224, 255, 0.5),
+                0 0 50px rgba(0, 150, 255, 0.3),
+                inset 0 0 30px rgba(255, 255, 255, 0.1);
+    background: linear-gradient(135deg, #00ffff 0%, #00d0ff 50%, #0088ff 100%);
 }
 
 .login-box button:hover::before {
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
 }
 
 .login-box button:active {
-    transform: translateY(-1px);
+    transform: translateY(-2px) scale(0.98);
 }
 
 .button-icon {
-    margin-right: 8px;
+    margin-right: 10px;
     display: inline-block;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .login-box button:hover .button-icon {
-    transform: translateX(3px);
+    transform: translateX(5px) scale(1.15);
 }
 
 .error-message {
-    margin-top: 15px;
-    padding: 14px 16px;
-    background: rgba(255, 59, 59, 0.12);
-    border-left: 4px solid #ff6b6b;
-    border-radius: 8px;
+    margin-top: 18px;
+    padding: 16px 18px;
+    background: rgba(255, 59, 59, 0.15);
+    border-left: 5px solid #ff4757;
+    border-radius: 10px;
     color: #ffb3b3;
-    font-weight: 500;
-    font-size: 0.9em;
+    font-weight: 600;
+    font-size: 0.92em;
     text-align: left;
-    animation: slideDown 0.3s ease, pulse 2s ease-in-out infinite;
+    animation: slideDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), pulse 2.5s ease-in-out infinite;
     display: none;
     backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(255, 71, 87, 0.2);
 }
 
 @keyframes pulse {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0.8; }
+    50% { opacity: 0.85; }
 }
 
 .error-message::before {
     content: '⚠️ ';
-    margin-right: 8px;
+    margin-right: 10px;
 }
 
 .remember-section {
-    margin-top: 24px;
-    padding-top: 24px;
-    border-top: 1px solid rgba(0, 200, 255, 0.1);
-    animation: slideInForm 0.6s ease 0.7s both;
+    margin-top: 28px;
+    padding-top: 28px;
+    border-top: 2px solid rgba(0, 200, 255, 0.15);
+    animation: slideInForm 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s both;
 }
 
 .remember-checkbox {
     display: flex;
     align-items: center;
     gap: 12px;
-    color: #a0c4ff;
+    color: #7fd8ff;
     font-size: 0.95em;
     cursor: pointer;
     user-select: none;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-weight: 500;
 }
 
 .remember-checkbox input {
@@ -406,22 +461,24 @@ body {
     height: 20px;
     cursor: pointer;
     accent-color: #00e0ff;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    filter: drop-shadow(0 0 5px rgba(0, 224, 255, 0.3));
 }
 
 .remember-checkbox input:checked {
-    box-shadow: 0 0 10px rgba(0, 224, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 224, 255, 0.6);
+    transform: scale(1.1);
 }
 
 .remember-checkbox:hover {
-    color: #00e0ff;
-    transform: translateX(4px);
+    color: #00ffff;
+    transform: translateX(6px);
 }
 
 @keyframes slideDown {
     from {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(-15px);
     }
     to {
         opacity: 1;
@@ -441,14 +498,16 @@ body {
 .back-link {
     display: inline-block;
     text-align: center;
-    margin-top: 20px;
-    color: #00e0ff;
+    margin-top: 24px;
+    color: #7fd8ff;
     text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    animation: slideInForm 0.6s ease 0.8s both;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: slideInForm 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.9s both;
     position: relative;
-    padding-bottom: 2px;
+    padding-bottom: 3px;
+    font-size: 0.95em;
+    letter-spacing: 0.3px;
 }
 
 .back-link::after {
@@ -458,8 +517,8 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #00e0ff, #0077ff);
-    transition: width 0.3s ease;
+    background: linear-gradient(90deg, #00e0ff, #00ffff, #0099ff);
+    transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .back-link:hover::after {
@@ -468,16 +527,18 @@ body {
 
 .back-link:hover {
     color: #00ffff;
-    transform: translateX(-3px);
+    transform: translateX(-5px);
+    text-shadow: 0 0 15px rgba(0, 224, 255, 0.4);
 }
 
 .back-link i {
-    margin-right: 6px;
-    transition: transform 0.3s ease;
+    margin-right: 8px;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: inline-block;
 }
 
 .back-link:hover i {
-    transform: translateX(-3px);
+    transform: translateX(-5px);
 }
 
 .login-footer {
@@ -486,33 +547,35 @@ body {
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.55);
     font-size: 0.85em;
     z-index: 2;
 }
 
 .login-footer p {
-    margin: 4px 0;
-    transition: all 0.3s ease;
+    margin: 5px 0;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-weight: 500;
 }
 
 .login-footer p:hover {
-    color: rgba(0, 224, 255, 0.7);
+    color: rgba(0, 224, 255, 0.8);
+    text-shadow: 0 0 10px rgba(0, 224, 255, 0.3);
 }
 
 @media (max-width: 768px) {
     .login-box {
-        padding: 40px 30px;
+        padding: 45px 35px;
         max-width: 90%;
     }
 
     .login-box h2 {
-        font-size: 1.8em;
-        margin-bottom: 15px;
+        font-size: 1.9em;
+        margin-bottom: 12px;
     }
 
     .login-box p {
-        font-size: 0.95em;
+        font-size: 0.96em;
     }
 
     .form-group label {
@@ -520,13 +583,14 @@ body {
     }
 
     .login-box input {
-        padding: 12px 12px 12px 40px;
+        padding: 14px 14px 14px 48px;
         font-size: 1em;
     }
 
     .login-box button {
-        padding: 12px 20px;
-        font-size: 0.95em;
+        padding: 14px 20px;
+        font-size: 0.98em;
+        margin-top: 28px;
     }
 }
 
@@ -536,22 +600,22 @@ body {
     }
 
     .login-box {
-        padding: 30px 20px;
+        padding: 35px 22px;
         max-width: 100%;
     }
 
     .login-box h2 {
-        font-size: 1.3em;
-        margin-bottom: 12px;
+        font-size: 1.5em;
+        margin-bottom: 10px;
     }
 
     .login-box p {
-        font-size: 0.9em;
+        font-size: 0.92em;
         line-height: 1.5;
     }
 
     .form-group {
-        margin-bottom: 15px;
+        margin-bottom: 18px;
     }
 
     .form-group label {
@@ -559,19 +623,19 @@ body {
     }
 
     .login-box input {
-        padding: 10px 10px 10px 35px;
+        padding: 12px 12px 12px 40px;
         font-size: 14px;
-        border-radius: 6px;
+        border-radius: 10px;
     }
 
     .login-box button {
-        padding: 10px 15px;
-        font-size: 0.9em;
-        margin-top: 15px;
+        padding: 12px 15px;
+        font-size: 0.95em;
+        margin-top: 20px;
     }
 
     .login-footer {
-        font-size: 0.85em;
+        font-size: 0.8em;
     }
 
     .login-footer a {
@@ -582,10 +646,10 @@ body {
 /* Floating animation for lock icon */
 @keyframes float {
     0%, 100% {
-        transform: translateY(0px);
+        transform: translateY(0px) scale(1);
     }
     50% {
-        transform: translateY(-10px);
+        transform: translateY(-15px) scale(1.05);
     }
 }
 
@@ -593,12 +657,27 @@ body {
 @keyframes scaleIn {
     from {
         opacity: 0;
-        transform: scale(0.8);
+        transform: scale(0.5) rotate(-15deg);
     }
     to {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1) rotate(0deg);
     }
+}
+
+/* Loading state */
+.login-box button.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.login-box button.loading .button-icon {
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 </style>
 </head>
@@ -707,6 +786,7 @@ body {
         
         const username = usernameInput.value.trim();
         const password = passwordInput.value.trim();
+        const button = loginForm.querySelector('button');
 
         if (!username || !password) {
             showError('Username dan password wajib diisi!');
@@ -719,6 +799,12 @@ body {
         } else {
             localStorage.removeItem('osis_remembered_username');
         }
+
+        // Add loading state
+        button.classList.add('loading');
+        button.disabled = true;
+        const originalText = button.innerHTML;
+        button.innerHTML = '<i class="ri-loader-4-line button-icon"></i>Memproses...';
 
         // Send login request via AJAX
         const formData = new FormData();
@@ -739,14 +825,32 @@ body {
                 // Save token to localStorage for cross-profile support
                 localStorage.setItem('osis_token', data.token);
                 localStorage.setItem('osis_username', username);
-                // Redirect to dashboard on success
-                window.location.href = data.redirect;
+                
+                // Success animation
+                button.innerHTML = '<i class="ri-check-line button-icon"></i>Masuk Berhasil!';
+                button.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
+                button.style.boxShadow = '0 12px 35px rgba(46, 204, 113, 0.3)';
+                
+                // Redirect after brief delay
+                setTimeout(() => {
+                    window.location.href = data.redirect;
+                }, 800);
             } else {
+                // Reset button
+                button.classList.remove('loading');
+                button.disabled = false;
+                button.innerHTML = originalText;
+                
                 // Show error message and auto-hide after 10 seconds
                 showError(data.error);
             }
         })
         .catch(error => {
+            // Reset button
+            button.classList.remove('loading');
+            button.disabled = false;
+            button.innerHTML = originalText;
+            
             showError('Terjadi kesalahan saat login!');
             console.error('Error:', error);
         });
@@ -754,13 +858,26 @@ body {
 
     // Function to show error message and auto-hide after 10 seconds
     function showError(message) {
-        errorMessage.textContent = '❌ ' + message;
+        errorMessage.textContent = message;
         errorMessage.style.display = 'block';
+        errorMessage.style.animation = 'none';
+        
+        // Trigger reflow
+        void errorMessage.offsetWidth;
+        
+        errorMessage.style.animation = 'slideDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
 
         // Auto-hide after 10 seconds
         setTimeout(function() {
-            errorMessage.style.display = 'none';
-            errorMessage.textContent = '';
+            errorMessage.style.opacity = '0';
+            errorMessage.style.transform = 'translateY(-15px)';
+            
+            setTimeout(() => {
+                errorMessage.style.display = 'none';
+                errorMessage.textContent = '';
+                errorMessage.style.opacity = '1';
+                errorMessage.style.transform = 'translateY(0)';
+            }, 300);
         }, 10000);
     }
 </script>
