@@ -56,15 +56,18 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             height: 600px;
             pointer-events: none;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(0, 180, 255, 0.4), transparent 70%);
-            filter: blur(80px);
+            background: radial-gradient(circle, rgba(0, 180, 255, 0.5), transparent 70%);
+            filter: blur(100px);
             z-index: 0;
-            animation: drift 15s ease-in-out infinite;
+            animation: drift 18s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+            box-shadow: 0 0 120px rgba(0, 180, 255, 0.3);
         }
         
         @keyframes drift {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(150px, -100px); }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(100px, -150px) scale(1.1); }
+            50% { transform: translate(200px, 100px) scale(0.9); }
+            75% { transform: translate(-100px, 80px) scale(1.05); }
         }
 
         header {
@@ -78,14 +81,14 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             align-items: center;
             padding: 12px 30px;
             z-index: 6;
-            border-bottom: 1px solid rgba(0, 200, 255, 0.1);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            animation: slideDown 0.8s ease-out;
+            border-bottom: 2px solid rgba(0, 200, 255, 0.15);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 200, 255, 0.1);
+            animation: slideDown 1s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         
         @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
+            from { transform: translateY(-100%) scale(0.95); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
         }
 
         .logo-container {
@@ -93,7 +96,13 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             align-items: center;
             gap: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: fadeInLeft 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .logo-container img {
@@ -102,13 +111,14 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid rgba(0, 255, 255, 0.5);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 10px rgba(0, 200, 255, 0.3);
         }
 
         .logo-container img:hover {
-            transform: scale(1.15);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
-            border-color: rgba(0, 255, 255, 0.9);
+            transform: scale(1.2) rotate(5deg);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.8), inset 0 0 15px rgba(0, 255, 255, 0.3);
+            border-color: rgba(0, 255, 255, 1);
         }
 
         header h2 {
@@ -116,14 +126,20 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             font-size: 1.3rem;
             font-weight: 700;
             letter-spacing: 1px;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             text-shadow: 0 2px 8px rgba(0, 255, 255, 0.3);
+            animation: fadeInRight 1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards;
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .logo-container:hover h2 {
             color: #00ffff;
-            text-shadow: 0 2px 15px rgba(0, 255, 255, 0.6);
-            transform: translateY(-2px);
+            text-shadow: 0 2px 20px rgba(0, 255, 255, 0.8);
+            transform: translateY(-3px) scale(1.05);
         }
 
         .burger {
@@ -142,11 +158,12 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             background: #00ffff;
             border-radius: 3px;
             left: 0;
-            transition: all 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
         }
 
         .burger span:nth-of-type(1) { top: 0; }
-        .burger span:nth-of-type(2) { top: 11px; }
+        .burger span:nth-of-type(2) { top: 11px; opacity: 1; }
         .burger span:nth-of-type(3) { bottom: 0; }
 
         .burger input:checked ~ span:nth-of-type(1) {
@@ -172,17 +189,17 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             top: 0;
             width: 280px;
             height: 100vh;
-            background: rgba(0, 20, 40, 0.99);
-            backdrop-filter: blur(10px);
-            border-right: 2px solid rgba(0, 200, 255, 0.2);
+            background: rgba(0, 20, 40, 0.98);
+            backdrop-filter: blur(15px);
+            border-right: 2px solid rgba(0, 200, 255, 0.3);
             display: flex;
             flex-direction: column;
             padding-top: 80px;
             padding-bottom: 20px;
-            transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             z-index: 5;
             overflow-y: auto;
-            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 8px 0 40px rgba(0, 0, 0, 0.5), inset -2px 0 30px rgba(0, 200, 255, 0.1);
         }
 
         .sidebar::-webkit-scrollbar {
@@ -204,6 +221,7 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
 
         .sidebar.active {
             left: 0;
+            box-shadow: 8px 0 50px rgba(0, 200, 255, 0.3), inset -2px 0 40px rgba(0, 200, 255, 0.15);
         }
 
         .sidebar a {
@@ -212,26 +230,46 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             padding: 14px 25px;
             font-weight: 600;
             border-left: 4px solid transparent;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             display: flex;
             align-items: center;
             gap: 12px;
+            overflow: hidden;
+        }
+
+        .sidebar a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(180deg, #00e0ff, #00ffff);
+            transform: translateY(-100%);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .sidebar a i {
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            z-index: 1;
         }
 
         .sidebar a:hover {
-            background: rgba(0, 255, 255, 0.15);
+            background: rgba(0, 255, 255, 0.18);
             color: #00ffff;
-            border-left-color: #00ffff;
+            border-left-color: transparent;
             padding-left: 35px;
+            box-shadow: inset 6px 0 20px rgba(0, 200, 255, 0.2);
+        }
+
+        .sidebar a:hover::before {
+            transform: translateY(0);
         }
 
         .sidebar a:hover i {
-            transform: rotate(10deg) scale(1.2);
+            transform: rotate(15deg) scale(1.25);
         }
 
         .sidebar a.admin-btn {
@@ -256,14 +294,14 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             text-align: center;
             max-width: 1200px;
             margin: 0 auto;
-            animation: fadeInUp 1s ease-out forwards;
+            animation: fadeInUp 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
             opacity: 0;
-            transform: translateY(40px);
+            transform: translateY(60px);
             position: relative;
         }
 
         @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         section h1, section h2 {
@@ -272,14 +310,20 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             margin-bottom: 20px;
             font-weight: 700;
             letter-spacing: -0.5px;
-            transition: all 0.3s ease;
-            text-shadow: 0 0 15px rgba(0, 200, 255, 0.8);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-shadow: 0 0 20px rgba(0, 200, 255, 0.6);
+            animation: titlePulse 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes titlePulse {
+            0% { opacity: 0; transform: scale(0.9) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         section h1:hover, section h2:hover {
-            transform: scale(1.05);
+            transform: scale(1.08) translateY(-3px);
             color: #00ffff;
-            text-shadow: 0 0 25px rgba(0, 200, 255, 1);
+            text-shadow: 0 0 35px rgba(0, 200, 255, 1), 0 0 60px rgba(0, 150, 255, 0.5);
         }
 
         section p {
@@ -287,11 +331,11 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             color: #e0f7ff;
             line-height: 1.8;
             margin-bottom: 15px;
-            transition: all 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         section p:hover {
-            transform: translateX(8px);
+            transform: translateX(12px);
             color: #00ffff;
         }
 
@@ -303,13 +347,19 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             margin: 0 auto 30px;
             cursor: pointer;
             border: 3px solid #00e0ff;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 30px rgba(0, 180, 255, 0.4);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 30px rgba(0, 180, 255, 0.4), inset 0 0 20px rgba(0, 200, 255, 0.2);
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
 
         .section-logo:hover {
-            transform: scale(1.12);
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.8);
+            transform: scale(1.15) rotateZ(8deg);
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.9), 0 15px 50px rgba(0, 200, 255, 0.5), inset 0 0 30px rgba(0, 255, 255, 0.3);
             border-color: #00ffff;
         }
 
@@ -328,26 +378,26 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             width: 280px;
             overflow: hidden;
             backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 200, 255, 0.1);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             cursor: pointer;
             position: relative;
         }
 
-        .card:nth-child(1) { animation: slideIn 0.8s 0.1s ease-out forwards; }
-        .card:nth-child(2) { animation: slideIn 0.8s 0.2s ease-out forwards; }
-        .card:nth-child(3) { animation: slideIn 0.8s 0.3s ease-out forwards; }
+        .card:nth-child(1) { animation: slideIn 1s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        .card:nth-child(2) { animation: slideIn 1s 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+        .card:nth-child(3) { animation: slideIn 1s 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
 
         @keyframes slideIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(50px) rotateX(10deg); }
+            to { opacity: 1; transform: translateY(0) rotateX(0); }
         }
 
         .card:hover {
-            transform: translateY(-15px) scale(1.05);
-            box-shadow: 0 15px 50px rgba(0, 225, 255, 0.3);
-            border-color: rgba(0, 255, 255, 0.6);
-            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-18px) scale(1.06) rotateY(-2deg);
+            box-shadow: 0 20px 60px rgba(0, 225, 255, 0.4), 0 0 40px rgba(0, 150, 255, 0.3), inset 0 0 20px rgba(0, 200, 255, 0.1);
+            border-color: rgba(0, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .card img {
@@ -456,10 +506,16 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 8px 20px rgba(0, 200, 255, 0.2);
+            box-shadow: 0 12px 30px rgba(0, 200, 255, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.1);
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            border: 2px solid rgba(0, 200, 255, 0.3);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 2px solid rgba(0, 200, 255, 0.4);
+            animation: iconPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes iconPop {
+            0% { opacity: 0; transform: scale(0) rotate(-180deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0); }
         }
 
         .wrapper .icon a {
@@ -470,12 +526,14 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             width: 100%;
             height: 100%;
             text-decoration: none;
+            position: relative;
+            z-index: 1;
         }
 
         .wrapper .icon:hover {
-            transform: translateY(-12px) scale(1.2);
-            box-shadow: 0 15px 40px rgba(0, 200, 255, 0.4);
-            border-color: rgba(0, 200, 255, 0.7);
+            transform: translateY(-15px) scale(1.25) rotate(5deg);
+            box-shadow: 0 20px 50px rgba(0, 200, 255, 0.5), 0 0 30px rgba(0, 150, 255, 0.4), inset 0 0 25px rgba(255, 255, 255, 0.2);
+            border-color: rgba(0, 200, 255, 0.9);
         }
 
         .wrapper .tooltip {
@@ -559,29 +617,31 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             height: 60px;
             font-size: 24px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             z-index: 9;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.1);
         }
 
         #feedbackBtn {
             bottom: 25px;
             right: 25px;
             background: linear-gradient(135deg, #00e0ff, #0077ff);
-            border: 2px solid rgba(0, 200, 255, 0.4);
-            animation: bounce 2.5s ease-in-out infinite;
+            border: 2px solid rgba(0, 200, 255, 0.5);
+            animation: bounce 3s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+            box-shadow: 0 12px 35px rgba(0, 200, 255, 0.3), 0 0 30px rgba(0, 150, 255, 0.2);
         }
 
         #scrollToTopBtn {
             bottom: 100px;
             right: -70px;
             background: linear-gradient(135deg, #0077ff, #005f99);
-            border: 2px solid rgba(0, 200, 255, 0.4);
-            transition: all 0.4s ease;
+            border: 2px solid rgba(0, 200, 255, 0.5);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 12px 35px rgba(0, 150, 255, 0.3), 0 0 20px rgba(0, 120, 200, 0.2);
         }
 
         #scrollToTopBtn.show {
@@ -589,8 +649,8 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
         }
 
         .float-btn:hover {
-            transform: scale(1.15);
-            box-shadow: 0 8px 25px rgba(0, 200, 255, 0.4);
+            transform: scale(1.2) rotate(10deg);
+            box-shadow: 0 15px 45px rgba(0, 200, 255, 0.5), 0 0 40px rgba(0, 150, 255, 0.3), inset 0 0 25px rgba(255, 255, 255, 0.15);
         }
 
         .float-btn:active {
@@ -598,8 +658,8 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-12px) scale(1.05); }
         }
 
         .feedback-popup {
@@ -611,18 +671,18 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             border-radius: 12px;
             padding: 25px;
             width: 320px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 18px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 200, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             z-index: 9;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             opacity: 0;
-            transform: translateY(20px) scale(0.95);
+            transform: translateY(30px) scale(0.9) rotateY(20deg);
             pointer-events: none;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .feedback-popup.show {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translateY(0) scale(1) rotateY(0);
             pointer-events: all;
         }
 
@@ -631,6 +691,8 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             margin-bottom: 15px;
             text-align: center;
             font-size: 1.1em;
+            animation: slideDown 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-shadow: 0 0 10px rgba(0, 200, 255, 0.3);
         }
 
         .feedback-popup textarea {
@@ -645,7 +707,13 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             outline: none;
             font-family: 'Poppins', sans-serif;
             font-size: 0.95em;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s backwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .feedback-popup textarea::placeholder {
@@ -653,34 +721,57 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
         }
 
         .feedback-popup textarea:focus {
-            border-color: rgba(0, 200, 255, 0.7);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 20px rgba(0, 200, 255, 0.2);
+            border-color: rgba(0, 200, 255, 0.8);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(0, 200, 255, 0.3), inset 0 0 15px rgba(0, 200, 255, 0.1);
+            transform: scale(1.02);
         }
 
         .feedback-popup button {
             margin-top: 12px;
             width: 100%;
-            background: linear-gradient(135deg, #00e0ff, #0077ff);
-            border: 2px solid rgba(0, 200, 255, 0.3);
-            padding: 11px;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #00e0ff 0%, #00b4ff 50%, #0077ff 100%);
+            border: 2px solid rgba(0, 200, 255, 0.4);
+            padding: 12px;
+            border-radius: 10px;
             cursor: pointer;
             color: white;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             font-family: 'Poppins', sans-serif;
+            animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+            box-shadow: 0 8px 25px rgba(0, 200, 255, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feedback-popup button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
         }
 
         .feedback-popup button:hover {
-            background: linear-gradient(135deg, #00ffff, #00e0ff);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 200, 255, 0.3);
-            border-color: rgba(0, 200, 255, 0.6);
+            background: linear-gradient(135deg, #00ffff 0%, #00d0ff 50%, #0088ff 100%);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 15px 45px rgba(0, 200, 255, 0.4), 0 0 30px rgba(0, 150, 255, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.1);
+            border-color: rgba(0, 200, 255, 0.8);
+        }
+
+        .feedback-popup button:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .feedback-popup button:active {
-            transform: translateY(0);
+            transform: translateY(-1px) scale(0.98);
         }
 
         .status-message {
@@ -705,10 +796,15 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             top: 0;
             left: 0;
             height: 4px;
-            background: linear-gradient(90deg, #00e0ff, #0077ff, #00e0ff);
+            background: linear-gradient(90deg, #00e0ff, #00b4ff, #0077ff, #00b4ff, #00e0ff);
             z-index: 11;
-            transition: width 0.05s linear;
-            box-shadow: 0 0 10px rgba(0, 200, 255, 0.5);
+            transition: width 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 0 20px rgba(0, 200, 255, 0.7), 0 0 40px rgba(0, 150, 255, 0.3);
+        }
+
+        .particle {
+            animation-duration: 12s !important;
+            animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
         }
 
         @media (max-width: 768px) {
