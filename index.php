@@ -972,58 +972,112 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
         document.getElementById('toggleMore').addEventListener('click', function() {
             const moreContent = document.getElementById('moreContent');
             const button = this;
+            const isOpen = moreContent.style.display !== 'none';
             
-            if (moreContent.style.display === 'none') {
-                // Tampilkan divisi dengan animasi
+            if (!isOpen) {
+                // ===== BUKA DIVISI =====
                 moreContent.style.display = 'block';
-                
-                // Trigger reflow untuk animasi
                 void moreContent.offsetWidth;
                 
-                // Animate in
                 moreContent.style.opacity = '1';
                 moreContent.style.transform = 'translateY(0)';
                 
-                button.textContent = '📋 Tutup Divisi';
+                // Button animasi
+                button.style.transition = 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
                 button.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 50%, #a93226 100%)';
-                button.style.boxShadow = '0 12px 35px rgba(231,76,60,0.3), 0 0 30px rgba(192,57,43,0.2)';
-                button.style.transform = 'rotate(180deg)';
+                button.style.boxShadow = '0 18px 50px rgba(231,76,60,0.4), 0 0 50px rgba(192,57,43,0.3), inset 0 0 20px rgba(255,255,255,0.05)';
+                button.style.transform = 'rotate(180deg) scale(1.05)';
+                button.style.textShadow = '0 2px 8px rgba(0,0,0,0.3)';
+                
+                // Text fade transition
+                button.style.opacity = '0.7';
+                setTimeout(() => {
+                    button.textContent = '📋 Tutup Divisi';
+                    button.style.opacity = '1';
+                }, 150);
                 
                 // Animate divisi cards
                 const cards = moreContent.querySelectorAll('.divisi-card');
                 cards.forEach((card, index) => {
                     card.style.animation = `none`;
                     void card.offsetWidth;
-                    card.style.animation = `slideInLeft 0.5s ease-out ${index * 0.08}s forwards`;
                     card.style.opacity = '0';
+                    card.style.animation = `slideInLeft 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${index * 0.1}s forwards`;
                 });
+                
             } else {
-                // Sembunyikan divisi dengan animasi
+                // ===== TUTUP DIVISI =====
                 moreContent.style.opacity = '0';
-                moreContent.style.transform = 'translateY(-20px)';
+                moreContent.style.transform = 'translateY(-30px) scale(0.95)';
+                
+                // Animate cards out
+                const cards = moreContent.querySelectorAll('.divisi-card');
+                cards.forEach((card) => {
+                    card.style.animation = `slideOutRight 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards`;
+                });
                 
                 setTimeout(() => {
                     moreContent.style.display = 'none';
                 }, 300);
                 
-                button.textContent = '📋 Lihat Semua Divisi';
+                // Button animasi close dengan pulse effect
+                button.style.transition = 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
                 button.style.background = 'linear-gradient(135deg, #00e0ff 0%, #00b4ff 50%, #0077ff 100%)';
-                button.style.boxShadow = '0 12px 35px rgba(0,200,255,0.3), 0 0 30px rgba(0,150,255,0.2)';
-                button.style.transform = 'rotate(0deg)';
+                button.style.boxShadow = '0 18px 50px rgba(0,200,255,0.4), 0 0 50px rgba(0,150,255,0.3), inset 0 0 20px rgba(255,255,255,0.08)';
+                button.style.transform = 'rotate(0deg) scale(0.98)';
+                button.style.textShadow = '0 2px 8px rgba(0,0,0,0.2)';
+                
+                // Text fade transition
+                button.style.opacity = '0.7';
+                setTimeout(() => {
+                    button.textContent = '📋 Lihat Semua Divisi';
+                    button.style.opacity = '1';
+                }, 150);
+                
+                // Pulse effect saat close
+                setTimeout(() => {
+                    button.style.animation = 'buttonPulse 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                }, 100);
             }
         });
 
-        // Add CSS animation dynamically
+        // Add CSS animations dynamically
         const style = document.createElement('style');
         style.textContent = `
             @keyframes slideInLeft {
                 from {
                     opacity: 0;
-                    transform: translateX(-40px) translateY(10px);
+                    transform: translateX(-50px) translateY(15px) rotateY(20deg);
                 }
                 to {
                     opacity: 1;
-                    transform: translateX(0) translateY(0);
+                    transform: translateX(0) translateY(0) rotateY(0);
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    opacity: 1;
+                    transform: translateX(0) translateY(0) rotateY(0);
+                }
+                to {
+                    opacity: 0;
+                    transform: translateX(50px) translateY(-15px) rotateY(-20deg);
+                }
+            }
+            
+            @keyframes buttonPulse {
+                0% {
+                    transform: scale(0.98);
+                    box-shadow: 0 18px 50px rgba(0,200,255,0.4), 0 0 50px rgba(0,150,255,0.3);
+                }
+                50% {
+                    transform: scale(1.03);
+                    box-shadow: 0 25px 70px rgba(0,200,255,0.5), 0 0 70px rgba(0,150,255,0.4);
+                }
+                100% {
+                    transform: scale(1);
+                    box-shadow: 0 18px 50px rgba(0,200,255,0.4), 0 0 50px rgba(0,150,255,0.3);
                 }
             }
         `;
