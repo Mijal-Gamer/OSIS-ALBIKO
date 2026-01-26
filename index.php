@@ -918,9 +918,9 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             mysqli_close($conn_auth);
             ?>
 
-            <button id="toggleMore" style="margin:20px auto; padding:12px 30px; background:linear-gradient(135deg, #00e0ff, #0077ff); border:2px solid rgba(0,200,255,0.3); border-radius:10px; color:white; cursor:pointer; font-weight:600; transition:all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); display:block; font-family:'Poppins', sans-serif; animation:scaleIn 0.6s ease-out 0.4s backwards;" onmouseover="this.style.boxShadow='0 8px 20px rgba(0,200,255,0.5)'; this.style.transform='translateY(-3px) scale(1.05)';" onmouseout="this.style.boxShadow='none'; this.style.transform='translateY(0) scale(1)';">📋 Lihat Semua Divisi</button>
+            <button id="toggleMore" style="margin:20px auto; padding:16px 40px; background:linear-gradient(135deg, #00e0ff 0%, #00b4ff 50%, #0077ff 100%); border:2px solid rgba(0,200,255,0.4); border-radius:12px; color:white; cursor:pointer; font-weight:700; font-size:1.05em; transition:all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); display:block; font-family:'Poppins', sans-serif; animation:scaleIn 0.6s ease-out 0.4s backwards; box-shadow:0 12px 35px rgba(0,200,255,0.3), 0 0 30px rgba(0,150,255,0.2); position:relative; overflow:hidden; letter-spacing:0.5px;" onmouseover="this.style.boxShadow='0 18px 50px rgba(0,224,255,0.5), 0 0 50px rgba(0,150,255,0.3)'; this.style.transform='translateY(-5px) scale(1.02)'; this.style.background='linear-gradient(135deg, #00ffff 0%, #00d0ff 50%, #0088ff 100%)';" onmouseout="this.style.boxShadow='0 12px 35px rgba(0,200,255,0.3), 0 0 30px rgba(0,150,255,0.2)'; this.style.transform='translateY(0) scale(1)'; this.style.background='linear-gradient(135deg, #00e0ff 0%, #00b4ff 50%, #0077ff 100%)';">📋 Lihat Semua Divisi</button>
 
-            <div id="moreContent" style="margin-top:20px; text-align:left; display:none;">
+            <div id="moreContent" style="margin-top:20px; text-align:left; display:none; opacity:0; transform:translateY(20px); transition:all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);">
                 <?php
                 require 'connect-auth.php';
                 
@@ -974,15 +974,60 @@ if (!$tiktok) $tiktok = 'https://www.tiktok.com/@osis.albiko';
             const button = this;
             
             if (moreContent.style.display === 'none') {
+                // Tampilkan divisi dengan animasi
                 moreContent.style.display = 'block';
+                
+                // Trigger reflow untuk animasi
+                void moreContent.offsetWidth;
+                
+                // Animate in
+                moreContent.style.opacity = '1';
+                moreContent.style.transform = 'translateY(0)';
+                
                 button.textContent = '📋 Tutup Divisi';
-                button.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+                button.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 50%, #a93226 100%)';
+                button.style.boxShadow = '0 12px 35px rgba(231,76,60,0.3), 0 0 30px rgba(192,57,43,0.2)';
+                button.style.transform = 'rotate(180deg)';
+                
+                // Animate divisi cards
+                const cards = moreContent.querySelectorAll('.divisi-card');
+                cards.forEach((card, index) => {
+                    card.style.animation = `none`;
+                    void card.offsetWidth;
+                    card.style.animation = `slideInLeft 0.5s ease-out ${index * 0.08}s forwards`;
+                    card.style.opacity = '0';
+                });
             } else {
-                moreContent.style.display = 'none';
+                // Sembunyikan divisi dengan animasi
+                moreContent.style.opacity = '0';
+                moreContent.style.transform = 'translateY(-20px)';
+                
+                setTimeout(() => {
+                    moreContent.style.display = 'none';
+                }, 300);
+                
                 button.textContent = '📋 Lihat Semua Divisi';
-                button.style.background = 'linear-gradient(135deg, #00e0ff, #0077ff)';
+                button.style.background = 'linear-gradient(135deg, #00e0ff 0%, #00b4ff 50%, #0077ff 100%)';
+                button.style.boxShadow = '0 12px 35px rgba(0,200,255,0.3), 0 0 30px rgba(0,150,255,0.2)';
+                button.style.transform = 'rotate(0deg)';
             }
         });
+
+        // Add CSS animation dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInLeft {
+                from {
+                    opacity: 0;
+                    transform: translateX(-40px) translateY(10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0) translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 
     <section id="kegiatan">
